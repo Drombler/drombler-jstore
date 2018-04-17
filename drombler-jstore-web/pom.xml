@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.drombler.jstore</groupId>
+        <artifactId>drombler-jstore-parent</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <relativePath>../drombler-jstore-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>drombler-jstore-web</artifactId>
+    <packaging>war</packaging>
+
+    <name>Drombler JStore - Web</name>
+    <inceptionYear>2018</inceptionYear>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>wildfly-swarm-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.drombler.jstore.protocol</groupId>
+            <artifactId>drombler-jstore-protocol</artifactId>
+        </dependency>
+        <!-- Java EE 7 dependency -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- WildFly Swarm Fractions -->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>cdi</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>swagger-webapp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>microprofile-health</artifactId>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>hibernate-validator</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>hibernate-search</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>jgroups</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>cdi-config</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>jaxrs-multipart</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>mail</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>management</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>bean-validation</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>keycloak-server</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>datasources</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>logging</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>swagger</artifactId>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>hystrix</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.wildfly.swarm</groupId>
+            <artifactId>jaxrs</artifactId>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>jpa</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>keycloak</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.wildfly.swarm</groupId>-->
+        <!--<artifactId>transactions</artifactId>-->
+        <!--</dependency>-->
+    </dependencies>
+</project>

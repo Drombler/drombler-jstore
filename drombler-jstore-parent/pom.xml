@@ -1,36 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-        COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Notice
- 
-The contents of this file are subject to the COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL)
-Version 1.0 (the "License"); you may not use this file except in
-compliance with the License. A copy of the License is available at
-http://www.opensource.org/licenses/cddl1.txt
-
-The Original Code is Drombler.org. The Initial Developer of the
-Original Code is Florian Brunner (GitHub user: puce77).
-Copyright 2018 Drombler.org. All Rights Reserved.
-
-Contributor(s): .
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.drombler</groupId>
-        <artifactId>drombler-oss-parent</artifactId>
-        <version>2.7</version>
-        <relativePath />
+        <artifactId>drombler-css-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
-    
+
     <groupId>org.drombler.jstore</groupId>
     <artifactId>drombler-jstore-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    
+
     <name>Drombler JStore - Parent</name>
-    <description>The parent POM of the Drombler project. This Drombler JStore Parent POM should be the parent (either directly or indirectly) of every Drombler JStore project unless there is a good reason to do otherwise (in which case the reason should be documented).</description>
+    <description>The parent POM of the Drombler project. This Drombler JStore Parent POM should be the parent (either
+        directly or indirectly) of every Drombler JStore project unless there is a good reason to do otherwise (in which
+        case the reason should be documented).
+    </description>
     <inceptionYear>2018</inceptionYear>
-    
+
     <scm>
         <connection>${scm.parent.connection}</connection>
         <developerConnection>${scm.parent.developerConnection}</developerConnection>
@@ -46,7 +36,7 @@ Contributor(s): .
             <url>../LICENSE.txt</url>
         </license>
     </licenses>
-    
+
     <distributionManagement>
         <site>
             <id>github</id>
@@ -54,16 +44,17 @@ Contributor(s): .
             <url>${distributionManagement.parent.url}/${project.artifactId}/</url>
         </site>
     </distributionManagement>
-    
+
     <properties>
-        <!--<java.min.version>9</java.min.version>-->
+        <java.min.version>9</java.min.version>
         <plugin.compiler.version>3.7.0</plugin.compiler.version>
         <plugin.jar.version>3.1.0</plugin.jar.version>
 
-        
+
         <!-- Dev Environment Defaults -->
         <scm.parent.connection>scm:git:https://github.com/Drombler/drombler-jstore.git</scm.parent.connection>
-        <scm.parent.developerConnection>scm:git:git@github.com:Drombler/drombler-jstore.git</scm.parent.developerConnection>
+        <scm.parent.developerConnection>scm:git:git@github.com:Drombler/drombler-jstore.git
+        </scm.parent.developerConnection>
         <scm.parent.url>https://github.com/Drombler/drombler-jstore</scm.parent.url>
         <!-- URLs to use with the standard site plugin with the git wagon -->
         <!--<distributionManagement.base.url>github:http://drombler.github.io/drombler-jstore-client-service/${project.version}</distributionManagement.base.url>-->
@@ -72,8 +63,12 @@ Contributor(s): .
         <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
         <!--<url.parent>http://www.drombler.org/drombler-fx/${project.version}/docs/site</url.parent>-->
 
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
+        <version.wildfly.swarm>2018.4.1</version.wildfly.swarm>
+        <drombler-jstore-protocol.version>0.1-SNAPSHOT</drombler-jstore-protocol.version>
     </properties>
 
     <!-- Not inherited!?? -->
@@ -82,7 +77,37 @@ Contributor(s): .
     </prerequisites>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.wildfly.swarm</groupId>
+                    <artifactId>wildfly-swarm-plugin</artifactId>
+                    <version>${version.wildfly.swarm}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.wildfly.swarm</groupId>
+                <artifactId>bom-all</artifactId>
+                <version>${version.wildfly.swarm}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>javax</groupId>
+                <artifactId>javaee-api</artifactId>
+                <version>7.0</version>
+            </dependency>
 
+            <dependency>
+                <groupId>org.drombler.jstore.protocol</groupId>
+                <artifactId>drombler-jstore-protocol</artifactId>
+                <version>${drombler-jstore-protocol.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

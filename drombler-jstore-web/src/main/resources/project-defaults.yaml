@@ -1,0 +1,14 @@
+swarm:
+    port:
+        offset: 10
+    context: 
+#        path: foo
+#    datasources:
+#        data-sources:
+#            LicenceDS:
+#                driver-name: h2
+#                jndi-name: java:jboss/datasources/LicenceDS
+#                connection-url: jdbc:h2:/opt/h2/license;AUTO_SERVER=TRUE;SCHEMA=DROMBLER_LICENSE
+#                user-name: sa
+#                password: sa
+    
