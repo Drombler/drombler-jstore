@@ -1,0 +1,189 @@
+@startuml
+skinparam cloud {
+    BackgroundColor<<Cloud>> WhiteSmoke
+}
+
+skinparam node {
+    BackgroundColor<<Desktop>> YellowGreen
+    BackgroundColor<<Server>> Gold
+}
+
+skinparam artifact {
+    BackgroundColor<<Drombler JStore>> DarkTurqoise
+    BackgroundColor<<Drombler JStore Client Service>> LightSkyBlue
+    BackgroundColor<<Drombler JStore Client>> MediumTurquoise
+    BackgroundColor<<Drombler JStore Application Vendor>> DodgerBlue
+    BackgroundColor<<Private Store>> DarkBlue
+    BackgroundColor<<Continuous Integration Server>> Coral
+}
+
+skinparam rectangle {
+    BackgroundColor<<Company>> RosyBrown
+    BackgroundColor<<End-User>> BurlyWood
+    BackgroundColor<<Customer>> Peru
+}
+
+rectangle Drombler <<Company>>{
+    cloud "Drombler Cloud" <<Cloud>>{
+        node "Drombler JStore Server" <<Server>>{
+            artifact dj1 <<Drombler JStore>>
+        }
+    }
+}
+
+rectangle "End-user 1" <<End-User>>{ 
+    node "End-user 1 Desktop" <<Desktop>>{
+        artifact djcs1.1 <<Drombler JStore Client Service>>
+        artifact djc1.1 <<Drombler JStore Client>>
+        djc1.1 --> djcs1.1: configures
+        djcs1.1 --> dj1: get updates
+        djc1.1 --> dj1: discovers
+    }
+}
+
+rectangle "End-user 2" <<End-User>>{ 
+    node "End-user 2 NAS" <<NAS>>{
+        artifact djcs2.3 <<Drombler JStore Client Service>>
+        djcs2.3 --> dj1: get updates
+    }
+
+    node "End-user 2 IoT Device" <<IoT Device>>{
+        artifact djcs2.1 <<Drombler JStore Client Service>>
+        djcs2.1 --> dj1: get updates
+    }
+
+    node "End-user 2 Desktop" <<Desktop>>{
+        artifact djcs2.2 <<Drombler JStore Client Service>>
+        artifact djc2.2 <<Drombler JStore Client>>
+        djc2.2 --> djcs2.2: configures
+        djcs2.2 --> dj1: get updates
+        djc2.2 --> dj1: discovers
+        djc2.2 --> djcs2.1: configures
+        djc2.2 --> djcs2.3: configures
+    }
+}
+
+rectangle "End-user 3" <<End-User>>{ 
+    node "End-user 3 Desktop 1" <<Desktop>>{
+        artifact djcs3.1 <<Drombler JStore Client Service>>
+        artifact djc3.1 <<Drombler JStore Client>>
+        djc3.1 --> djcs3.1: configures
+        djcs3.1 --> dj1: get updates
+        djc3.1 --> dj1: discovers
+    }
+    node "End-user 3 Desktop 2" <<Desktop>>{
+        artifact djcs3.2 <<Drombler JStore Client Service>>
+        artifact djc3.2 <<Drombler JStore Client>>
+        djc3.2 --> djcs3.2: configures
+        djcs3.2 --> dj1: get updates
+        djc3.2 --> dj1: discovers
+    }
+}
+
+rectangle "Company 1" <<Company>>{
+    cloud "Company 1 Cloud" <<Cloud>>{
+        node "Company 1 Server 1" <<Server>>{
+            artifact ps1 <<Private Store>>
+            ps1 .up.> dj1: proxy
+        }
+
+        node "Company 1 Server 2" <<Server>>{
+            artifact ci1 <<Continuous Integration Server>>
+            ci1 .up.> ps1: deploys
+        }
+    }
+
+    node "Company 1 Employee 1 Desktop" <<Desktop>>{
+        artifact djcs4.1 <<Drombler JStore Client Service>>
+        artifact djc4.1 <<Drombler JStore Client>>
+        djc4.1 --> djcs4.1: configures
+        djcs4.1 .up.> dj1: get updates
+        djc4.1 .up.> dj1: discovers
+        djcs4.1 --> ps1: get updates
+        djc4.1 --> ps1: discovers
+    }
+}
+
+rectangle "Company 2" <<Company>>{
+    cloud "Company 2 Cloud" <<Cloud>>{
+        node "Company 2 Server 1" <<Server>>{
+            artifact ps2 <<Private Store>>
+            ps2 .up.> dj1: proxy
+        }
+
+        node "Company 2 Server 2" <<Server>>{
+            artifact ci2 <<Continuous Integration Server>>
+            ci2 .up.> ps2: deploys
+        }
+    }
+
+    node "Company 2 Employee 1 Desktop" <<Desktop>>{
+        artifact djcs5.1 <<Drombler JStore Client Service>>
+        djcs5.1 --> ps2: get updates
+    }
+}
+
+rectangle "Company 3" <<Company>>{
+    cloud "Company 3 Cloud" <<Cloud>>{
+        node "Company 3 Server 1" <<Server>>{
+            artifact ps3 <<Private Store>>
+            ps3 .left.> dj1: proxy
+        }
+
+        node "Company 3 Server 2" <<Server>>{
+            artifact ci3 <<Continuous Integration Server>>
+            ci3 .up.> ps3: deploys
+        }
+    }
+}
+
+rectangle "Customer 1" <<Customer>>{
+    node "Customer 1 Desktop" <<Desktop>>{
+        artifact djcs6.1 <<Drombler JStore Client Service>>
+        artifact djc6.1 <<Drombler JStore Client>>
+        djc6.1 --> djcs6.1: configures
+        djcs6.1 -left-> dj1: get updates
+        djc6.1 -left-> dj1: discovers            
+        djcs6.1 -down-> ps3: get updates
+    }
+}
+
+rectangle "Company 4" <<Company>>{
+    cloud "Company 4 Cloud" <<Cloud>>{
+        node "Company 4 Server 1" <<Server>>{
+            artifact ps4 <<Private Store>>
+            ps4 .up.> dj1: proxy
+        }
+
+        node "Company 4 Server 3" <<Server>>{
+            artifact djav1 <<Drombler JStore Application Vendor>>
+            dj1 -left-> djav1: proxy
+        }
+
+        node "Company 4 Server 2" <<Server>>{
+            artifact ci4 <<Continuous Integration Server>>
+            ci4 .up.> ps4: deploys
+            ci4 -up-> djav1: deploys
+        }
+    }
+
+    node "Company 1 Employee 1 Desktop" <<Desktop>>{
+        artifact djcs4.1 <<Drombler JStore Client Service>>
+        artifact djc4.1 <<Drombler JStore Client>>
+        djc4.1 --> djcs4.1: configures
+        djcs4.1 .up.> dj1: get updates
+        djc4.1 .up.> dj1: discovers
+        djcs4.1 --> ps1: get updates
+        djc4.1 --> ps1: discovers
+    }
+}
+
+rectangle "Oracle" <<Company>>{
+    cloud "Oracle Cloud" <<Cloud>>{
+        node "Oracle Server 1" <<Server>>{
+            artifact djjv1 <<Drombler JStore JRE Vendor>>
+            dj1 -left-> djjv1: proxy
+        }
+    }
+}
+@enduml

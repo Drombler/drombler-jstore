@@ -1,1 +1,8 @@
+title: Drombler JStore
+description: The easy way to manage your Java application and JRE installations.
+google_analytics:
+show_downloads: true
 theme: jekyll-theme-slate
+
+gems:
+  - jekyll-mentions
