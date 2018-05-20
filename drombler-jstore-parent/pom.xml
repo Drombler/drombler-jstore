@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.drombler</groupId>
+        <groupId>com.drombler</groupId>
         <artifactId>drombler-css-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
-    <groupId>org.drombler.jstore</groupId>
+    <groupId>com.drombler.jstore</groupId>
     <artifactId>drombler-jstore-parent</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -46,7 +46,7 @@
     </distributionManagement>
 
     <properties>
-        <java.min.version>9</java.min.version>
+        <!--<java.min.version>10</java.min.version>--> <!-- supported by AWS Elastic Bean / create customer Docker image ? -->
         <plugin.compiler.version>3.7.0</plugin.compiler.version>
         <plugin.jar.version>3.1.0</plugin.jar.version>
 
@@ -67,7 +67,9 @@
 
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
-        <version.wildfly.swarm>2018.4.1</version.wildfly.swarm>
+        <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
+        <!--<springfox-swagger.version>2.9.0</springfox-swagger.version>-->
+        <springfox-swagger.version>2.8.0</springfox-swagger.version>
         <drombler-jstore-protocol.version>0.1-SNAPSHOT</drombler-jstore-protocol.version>
     </properties>
 
@@ -80,9 +82,9 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.wildfly.swarm</groupId>
-                    <artifactId>wildfly-swarm-plugin</artifactId>
-                    <version>${version.wildfly.swarm}</version>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -91,22 +93,30 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.wildfly.swarm</groupId>
-                <artifactId>bom-all</artifactId>
-                <version>${version.wildfly.swarm}</version>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            <dependency>
-                <groupId>javax</groupId>
-                <artifactId>javaee-api</artifactId>
-                <version>7.0</version>
-            </dependency>
+
 
             <dependency>
                 <groupId>org.drombler.jstore.protocol</groupId>
                 <artifactId>drombler-jstore-protocol</artifactId>
                 <version>${drombler-jstore-protocol.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,27 +1,28 @@
-package com.drombler.jstore.web.resource;
+package com.drombler.jstore.web.controller.v1;
 
 import io.swagger.annotations.Api;
 import org.drombler.jstore.protocol.json.ApplicationVersionInfo;
 import org.drombler.jstore.protocol.json.ApplicationVersionSearchRequest;
 import org.drombler.jstore.protocol.json.ApplicationVersionSearchResponse;
 import org.drombler.jstore.protocol.json.JreInfo;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = {"ApplicationVersionSearchResource"})
-@Path("/application-version-search")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class ApplicationVersionSearchResource {
+import static com.drombler.jstore.web.controller.RestControllerUtils.V1_PATH;
 
-    @POST
-    public ApplicationVersionSearchResponse startApplicationVersionSearch(ApplicationVersionSearchRequest request){
+@Api(tags = {"ApplicationVersionSearchController"})
+@RestController
+@RequestMapping(path = V1_PATH + "/application-version-search", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+public class ApplicationVersionSearchController {
+
+    @PostMapping
+    public ApplicationVersionSearchResponse startApplicationVersionSearch(@RequestBody ApplicationVersionSearchRequest request) {
         ApplicationVersionSearchResponse response = new ApplicationVersionSearchResponse();
         List<ApplicationVersionInfo> infos = request.getApplicationIds().stream()
                 .map(applicationId -> {
@@ -52,6 +53,7 @@ public class ApplicationVersionSearchResource {
                     }
                 })
                 .collect(Collectors.toList());
+        response.setApplicationVersionInfos(infos);
         return response;
     }
 }

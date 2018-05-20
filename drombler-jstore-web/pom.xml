@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.drombler.jstore</groupId>
+        <groupId>com.drombler.jstore</groupId>
         <artifactId>drombler-jstore-parent</artifactId>
         <version>0.1-SNAPSHOT</version>
         <relativePath>../drombler-jstore-parent/pom.xml</relativePath>
     </parent>
     <artifactId>drombler-jstore-web</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>Drombler JStore - Web</name>
     <inceptionYear>2018</inceptionYear>
@@ -18,12 +18,19 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.wildfly.swarm</groupId>
-                <artifactId>wildfly-swarm-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>build-info</id>
                         <goals>
-                            <goal>package</goal>
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>repackage</id>
+                        <goals>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -36,92 +43,73 @@
             <groupId>org.drombler.jstore.protocol</groupId>
             <artifactId>drombler-jstore-protocol</artifactId>
         </dependency>
-        <!-- Java EE 7 dependency -->
+
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <scope>provided</scope>
+            <groupId>ch.sbb</groupId>
+            <artifactId>springboot-graceful-shutdown</artifactId>
+            <version>2.0</version>
         </dependency>
-        <!-- WildFly Swarm Fractions -->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>cdi</artifactId>-->
-        <!--</dependency>-->
+
         <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>swagger-webapp</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>microprofile-health</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>hibernate-validator</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>hibernate-search</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>jgroups</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>cdi-config</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>jaxrs-multipart</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>mail</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>management</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>bean-validation</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>keycloak-server</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>datasources</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>logging</artifactId>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-data-jpa</artifactId>-->
         <!--</dependency>-->
         <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>swagger</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>hystrix</artifactId>-->
+        <!--&lt;!&ndash; Not supported by Springfox Swagger, yet&ndash;&gt;-->
+        <!--&lt;!&ndash; Non-blocking processing not supported by JDBC/ JPA, yet&ndash;&gt;-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-webflux</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+        <!--<groupId>org.liquibase</groupId>-->
+        <!--<artifactId>liquibase-core</artifactId>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>com.h2database</groupId>-->
+        <!--<artifactId>h2</artifactId>-->
+        <!--<scope>runtime</scope>-->
         <!--</dependency>-->
         <dependency>
-            <groupId>org.wildfly.swarm</groupId>
-            <artifactId>jaxrs</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>jpa</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>keycloak</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>transactions</artifactId>-->
-        <!--</dependency>-->
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+
 </project>
