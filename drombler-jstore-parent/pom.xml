@@ -5,7 +5,7 @@
         <groupId>com.drombler</groupId>
         <artifactId>drombler-css-parent</artifactId>
         <version>1.1</version>
-        <relativePath/>
+        <relativePath />
     </parent>
 
     <groupId>com.drombler.jstore</groupId>
