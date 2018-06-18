@@ -7,6 +7,16 @@ spring:
 
 
 management:
+  endpoints:
+    web:
+      base-path: '/webresources'
   endpoint:
     health:
       show-details: ALWAYS
+
+jstore:
+  nexus:
+    endpoint: http://ec2-34-201-26-96.compute-1.amazonaws.com:8081
+    all-repo: '/repository/jstore-test'
+    free-only-repo: '/repository/jstore-free-test'
+    paid-only-repo: '/repository/jstore-paid-test'

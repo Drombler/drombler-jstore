@@ -18,7 +18,7 @@ import static com.drombler.jstore.web.controller.RestControllerUtils.V1_PATH;
 
 @Api(tags = {"ApplicationVersionSearchController"})
 @RestController
-@RequestMapping(path = V1_PATH + "/application-version-search", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = V1_PATH + "/application-version-search", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ApplicationVersionSearchController {
 
     @PostMapping
