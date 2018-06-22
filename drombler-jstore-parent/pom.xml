@@ -67,7 +67,7 @@
 
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
-        <drombler-jstore-protocol.version>0.1</drombler-jstore-protocol.version>
+        <drombler-jstore-protocol.version>0.2-SNAPSHOT</drombler-jstore-protocol.version>
     </properties>
 
     <!-- Not inherited!?? -->
