@@ -44,6 +44,11 @@
             <artifactId>drombler-jstore-integration-nexus</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.drombler.jstore.protocol</groupId>
@@ -114,6 +119,7 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 </project>
