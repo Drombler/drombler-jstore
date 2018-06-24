@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Bean;
 
-@ConfigurationProperties
+@ConfigurationProperties(prefix = "jstore")
 public class JStoreAppConfigurationProperties {
 
     @NestedConfigurationProperty

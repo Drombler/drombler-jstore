@@ -12,7 +12,7 @@ public class NexusConfig {
     @Bean
     public NexusClientConfiguration createNexusClientConfiguration(NexusConfigurationProperties nexusConfigurationProperties) {
         NexusClientConfiguration nexusClientConfiguration = new NexusClientConfiguration();
-        nexusClientConfiguration.setEndpoint(nexusClientConfiguration.getEndpoint());
+        nexusClientConfiguration.setEndpoint(nexusConfigurationProperties.getEndpoint());
         nexusClientConfiguration.setAllRepo(nexusConfigurationProperties.getAllRepo());
         nexusClientConfiguration.setFreeOnlyRepo(nexusConfigurationProperties.getFreeOnlyRepo());
         nexusClientConfiguration.setPaidOnlyRepo(nexusConfigurationProperties.getPaidOnlyRepo());
