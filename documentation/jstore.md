@@ -1,6 +1,6 @@
 Under Construction
 
-Swagger: http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/swagger-ui.html
+The Swagger documentation is online [available](http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/swagger-ui.html).
 
 ### Current Goals
 * a free service (backend) run by Drombler
