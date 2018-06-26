@@ -1,4 +1,4 @@
 Under Construction
 
 
-![Overview](drombler-jstore.png)
+![Deployment diagram](drombler-jstore.png)
