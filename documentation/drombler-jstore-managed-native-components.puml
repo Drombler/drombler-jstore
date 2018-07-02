@@ -1,0 +1,14 @@
+@startuml
+
+!include drombler-jstore-commons.iuml
+
+
+rectangle "Oracle" <<Company>>{
+    cloud "Oracle Cloud" <<Cloud>>{
+        node "Oracle Server 1" <<Server>>{
+            artifact djjv1 <<Drombler JStore JRE Vendor>>
+            dj1 -right-> djjv1: proxy
+        }
+    }
+}
+@enduml

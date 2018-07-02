@@ -1,0 +1,36 @@
+@startuml
+
+skinparam cloud {
+    BackgroundColor<<Cloud>> WhiteSmoke
+}
+
+skinparam node {
+    BackgroundColor<<Desktop>> YellowGreen
+    BackgroundColor<<Server>> Gold
+}
+
+skinparam artifact {
+    BackgroundColor<<Drombler JStore>> DarkTurqoise
+    BackgroundColor<<Drombler JStore Client Agent>> LightSkyBlue
+    BackgroundColor<<Drombler JStore Client>> MediumTurquoise
+    BackgroundColor<<Drombler JStore Application Vendor>> DodgerBlue
+    BackgroundColor<<Private Store>> DarkBlue
+    BackgroundColor<<Continuous Integration Server>> Coral
+}
+
+skinparam rectangle {
+    BackgroundColor<<Company>> RosyBrown
+    BackgroundColor<<End-User>> BurlyWood
+    BackgroundColor<<Customer>> Peru
+}
+
+rectangle Drombler <<Company>>{
+    cloud "Drombler Cloud" <<Cloud>>{
+        node "Drombler JStore Server" <<Server>>{
+            artifact dj1 <<Drombler JStore>>
+        }
+    }
+}
+
+
+@enduml
