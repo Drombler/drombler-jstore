@@ -84,12 +84,12 @@ rectangle "Company 1" <<Company>>{
     cloud "Company 1 Cloud" <<Cloud>>{
         node "Company 1 Server 1" <<Server>>{
             artifact ps1 <<Private Store>>
-            ps1 .up.> dj1: proxy
+            ps1 -up-> dj1: proxy
         }
 
         node "Company 1 Server 2" <<Server>>{
             artifact ci1 <<Continuous Integration Server>>
-            ci1 .up.> ps1: deploys
+            ci1 -up-> ps1: deploys
         }
     }
 
@@ -97,8 +97,8 @@ rectangle "Company 1" <<Company>>{
         artifact djca4.1 <<Drombler JStore Client Agent>>
         artifact djc4.1 <<Drombler JStore Client>>
         djc4.1 --> djca4.1: configures
-        djca4.1 .up.> dj1: get updates
-        djc4.1 .up.> dj1: discovers
+        djca4.1 -up-> dj1: get updates
+        djc4.1 -up-> dj1: discovers
         djca4.1 --> ps1: get updates
         djc4.1 --> ps1: discovers
     }
@@ -108,12 +108,12 @@ rectangle "Company 2" <<Company>>{
     cloud "Company 2 Cloud" <<Cloud>>{
         node "Company 2 Server 1" <<Server>>{
             artifact ps2 <<Private Store>>
-            ps2 .up.> dj1: proxy
+            ps2 -up-> dj1: proxy
         }
 
         node "Company 2 Server 2" <<Server>>{
             artifact ci2 <<Continuous Integration Server>>
-            ci2 .up.> ps2: deploys
+            ci2 -up-> ps2: deploys
         }
     }
 
@@ -127,12 +127,12 @@ rectangle "Company 3" <<Company>>{
     cloud "Company 3 Cloud" <<Cloud>>{
         node "Company 3 Server 1" <<Server>>{
             artifact ps3 <<Private Store>>
-            ps3 .left.> dj1: proxy
+            ps3 -left-> dj1: proxy
         }
 
         node "Company 3 Server 2" <<Server>>{
             artifact ci3 <<Continuous Integration Server>>
-            ci3 .up.> ps3: deploys
+            ci3 -up-> ps3: deploys
         }
     }
 }
@@ -152,7 +152,7 @@ rectangle "Company 4" <<Company>>{
     cloud "Company 4 Cloud" <<Cloud>>{
         node "Company 4 Server 1" <<Server>>{
             artifact ps4 <<Private Store>>
-            ps4 .up.> dj1: proxy
+            ps4 -right-> dj1: proxy
         }
 
         node "Company 4 Server 3" <<Server>>{
@@ -167,14 +167,14 @@ rectangle "Company 4" <<Company>>{
         }
     }
 
-    node "Company 1 Employee 1 Desktop" <<Desktop>>{
-        artifact djca4.1 <<Drombler JStore Client Agent>>
-        artifact djc4.1 <<Drombler JStore Client>>
-        djc4.1 --> djca4.1: configures
-        djca4.1 .up.> dj1: get updates
-        djc4.1 .up.> dj1: discovers
-        djca4.1 --> ps1: get updates
-        djc4.1 --> ps1: discovers
+    node "Company 4 Employee 1 Desktop" <<Desktop>>{
+        artifact djca7.1 <<Drombler JStore Client Agent>>
+        artifact djc7.1 <<Drombler JStore Client>>
+        djc7.1 --> djca7.1: configures
+        djca7.1 -right-> dj1: get updates
+        djc7.1 -right-> dj1: discovers
+        djca7.1 --> ps4: get updates
+        djc7.1 --> ps4: discovers
     }
 }
 
