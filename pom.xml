@@ -44,6 +44,7 @@
         <module>drombler-jstore-parent</module>
         <module>drombler-jstore-model</module>
         <module>drombler-jstore-integration-nexus</module>
+        <module>drombler-jstore-managed-jre</module>
         <module>drombler-jstore-web</module>
     </modules>
 
