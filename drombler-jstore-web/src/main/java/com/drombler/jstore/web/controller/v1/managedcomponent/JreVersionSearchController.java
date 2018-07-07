@@ -1,4 +1,4 @@
-package com.drombler.jstore.web.controller.v1;
+package com.drombler.jstore.web.controller.v1.managedcomponent;
 
 import com.drombler.jstore.managed.jre.JreInfoManager;
 import io.swagger.annotations.Api;
@@ -18,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.drombler.jstore.web.controller.RestControllerUtils.MANAGED_COMPONENTS_V1_PATH;
 import static com.drombler.jstore.web.controller.RestControllerUtils.V1_PATH;
 
 @Api(tags = {"JreVersionSearchController V1"})
 @RestController("JreVersionSearchControllerV1")
-@RequestMapping(path = V1_PATH + "/jre-version-search", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = MANAGED_COMPONENTS_V1_PATH + "/jre-version-search", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class JreVersionSearchController {
     @Autowired
     private List<JreInfoManager> jreVersionManagers;

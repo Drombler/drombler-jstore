@@ -38,4 +38,9 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
     public Optional<String> getLatestUpgradableJREImplementationVersion(SystemInfo systemInfo, SelectedJRE selectedJRE) {
         return Optional.empty();
     }
+
+    @Override
+    public Optional<String> getLatestUpgradableJreUrl(SystemInfo systemInfo, SelectedJRE selectedJRE) {
+        return Optional.empty();
+    }
 }

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import static com.drombler.jstore.web.controller.RestControllerUtils.MANAGED_COMPONENTS_V1_PATH;
 
-@Api(tags = {"ApplicationController"})
-@RestController
+@Api(tags = {"ApplicationController V1"})
+@RestController("ApplicationControllerV1")
 @RequestMapping(path = MANAGED_COMPONENTS_V1_PATH + "/applications")
 public class ApplicationController {
 

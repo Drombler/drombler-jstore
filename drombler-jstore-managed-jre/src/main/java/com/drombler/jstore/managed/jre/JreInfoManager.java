@@ -9,4 +9,6 @@ public interface JreInfoManager {
     boolean supportsVendorId(String vendorId);
 
     Optional<String> getLatestUpgradableJREImplementationVersion(SystemInfo systemInfo, SelectedJRE selectedJRE);
+
+    Optional<String> getLatestUpgradableJreUrl(SystemInfo systemInfo, SelectedJRE selectedJRE);
 }

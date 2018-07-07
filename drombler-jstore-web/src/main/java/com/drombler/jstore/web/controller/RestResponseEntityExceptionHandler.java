@@ -18,6 +18,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     static {
         CODE_STATUS_MAP.put(JStoreErrorCode.JSTORE_ILLEGAL_PROPERTY, HttpStatus.BAD_REQUEST);
+        CODE_STATUS_MAP.put(JStoreErrorCode.JSTORE_UNSUPPORTED_JRE_VENDOR, HttpStatus.BAD_REQUEST);
+        CODE_STATUS_MAP.put(JStoreErrorCode.JSTORE_NO_UPGRADEABLE_JRE_FOUND, HttpStatus.NOT_FOUND);
         CODE_STATUS_MAP.put(JStoreErrorCode.JSTORE_UNKNOWN, HttpStatus.INTERNAL_SERVER_ERROR);
         CODE_STATUS_MAP.put(JStoreErrorCode.JSTORE_NEXUS_CLIENT, HttpStatus.INTERNAL_SERVER_ERROR);
         CODE_STATUS_MAP.put(JStoreErrorCode.NEXUS_UNKNOWN, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,4 +1,4 @@
-package com.drombler.jstore.web.controller.v1;
+package com.drombler.jstore.web.controller.v1.managedcomponent;
 
 import io.swagger.annotations.Api;
 import org.drombler.jstore.protocol.json.ApplicationVersionSearchRequest;
@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.drombler.jstore.web.controller.RestControllerUtils.MANAGED_COMPONENTS_V1_PATH;
 import static com.drombler.jstore.web.controller.RestControllerUtils.V1_PATH;
 
-@Api(tags = {"ApplicationVersionSearchController"})
-@RestController
-@RequestMapping(path = V1_PATH + "/application-version-search", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(tags = {"ApplicationVersionSearchController V1"})
+@RestController("ApplicationVersionSearchControllerV1")
+@RequestMapping(path = MANAGED_COMPONENTS_V1_PATH + "/application-version-search", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ApplicationVersionSearchController {
 
     @PostMapping
