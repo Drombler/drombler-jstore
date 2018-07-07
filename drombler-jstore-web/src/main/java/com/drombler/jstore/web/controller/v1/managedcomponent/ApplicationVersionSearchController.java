@@ -27,12 +27,12 @@ public class ApplicationVersionSearchController {
         List<UpgradableApplication> upgradableApplications = request.getSelectedApplications().stream()
                 .map(selectedApplication -> {
                     switch (selectedApplication.getApplicationId().getArtifactId()) {
-                        case "drombler-jstore-client":
+                        case "drombler-jstore-client-application":
                             UpgradableApplication app = new UpgradableApplication();
                             app.setApplicationId(selectedApplication.getApplicationId());
                             app.setLatestUpgradableApplicationVersion("0.1-SNAPTHOT");
                             return app;
-                        case "drombler-jstore-client-service":
+                        case "drombler-jstore-client-agent-application":
                             UpgradableApplication app2 = new UpgradableApplication();
                             app2.setApplicationId(selectedApplication.getApplicationId());
                             app2.setLatestUpgradableApplicationVersion("0.1-SNAPTHOT");
