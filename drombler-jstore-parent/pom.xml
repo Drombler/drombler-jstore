@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.drombler</groupId>
         <artifactId>drombler-css-parent</artifactId>
-        <version>1.1</version>
-        <relativePath />
+        <version>2.1</version>
+        <relativePath/>
     </parent>
 
     <groupId>com.drombler.jstore</groupId>
@@ -66,10 +67,7 @@
 
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
-        <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
-        <!--<springfox-swagger.version>2.9.0</springfox-swagger.version>-->
-        <springfox-swagger.version>2.8.0</springfox-swagger.version>
-        <drombler-jstore-protocol.version>0.1</drombler-jstore-protocol.version>
+        <drombler-jstore-protocol.version>0.3-SNAPSHOT</drombler-jstore-protocol.version>
     </properties>
 
     <!-- Not inherited!?? -->
@@ -77,45 +75,18 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <!-- Import dependency management from Spring Boot -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
-
             <dependency>
                 <groupId>org.drombler.jstore.protocol</groupId>
                 <artifactId>drombler-jstore-protocol</artifactId>
                 <version>${drombler-jstore-protocol.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox-swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${springfox-swagger.version}</version>
+                <groupId>com.vdurmont</groupId>
+                <artifactId>semver4j</artifactId>
+                <version>2.2.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
