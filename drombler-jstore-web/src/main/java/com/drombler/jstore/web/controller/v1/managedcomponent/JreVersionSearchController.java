@@ -1,25 +1,25 @@
 package com.drombler.jstore.web.controller.v1.managedcomponent;
 
 import com.drombler.jstore.managed.jre.JreInfoManager;
+import com.drombler.jstore.model.JStoreException;
+import com.drombler.jstore.model.VersionedPlatform;
 import io.swagger.annotations.Api;
 import org.drombler.jstore.protocol.json.JreVersionSearchRequest;
 import org.drombler.jstore.protocol.json.JreVersionSearchResponse;
+import org.drombler.jstore.protocol.json.SelectedJRE;
 import org.drombler.jstore.protocol.json.UpgradableJRE;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.support.SpringFactoriesLoader;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static com.drombler.jstore.web.controller.RestControllerUtils.MANAGED_COMPONENTS_V1_PATH;
-import static com.drombler.jstore.web.controller.RestControllerUtils.V1_PATH;
 
 @Api(tags = {"JreVersionSearchController V1"})
 @RestController("JreVersionSearchControllerV1")
@@ -34,25 +34,25 @@ public class JreVersionSearchController {
 //    }
 
     @PostMapping
-    public JreVersionSearchResponse startJreVersionSearch(@RequestBody JreVersionSearchRequest request) {
+    public JreVersionSearchResponse startJreVersionSearch(@RequestBody JreVersionSearchRequest request) throws JStoreException {
         JreVersionSearchResponse response = new JreVersionSearchResponse();
         List<UpgradableJRE> upgradableJREs = new ArrayList<>();
-        request.getSelectedJREs().forEach(selectedJRE -> {
+        for (SelectedJRE selectedJRE : request.getSelectedJREs()) {
             Optional<JreInfoManager> optionalJreInfoManager = jreVersionManagers.stream()
                     .filter(jreInfoManager -> jreInfoManager.supportsVendorId(selectedJRE.getJreInfo().getJreVendorId().toLowerCase().trim()))
                     .findFirst();
             if (optionalJreInfoManager.isPresent()) {
                 JreInfoManager jreInfoManager = optionalJreInfoManager.get();
-                Optional<String> latestUpgradableJREImplementationVersion = jreInfoManager.getLatestUpgradableJREImplementationVersion(request.getSystemInfo(), selectedJRE);
+                Optional<VersionedPlatform> latestUpgradableJREImplementationVersion = jreInfoManager.getLatestUpgradableJREImplementationVersion(request.getSystemInfo(), selectedJRE);
 
                 if (latestUpgradableJREImplementationVersion.isPresent()) {
                     UpgradableJRE jre = new UpgradableJRE();
                     jre.setJreInfo(selectedJRE.getJreInfo());
-                    jre.setLatestUpgradableJREImplementationVersion(latestUpgradableJREImplementationVersion.get());
+                    jre.setLatestUpgradableJREImplementationVersion(latestUpgradableJREImplementationVersion.get().getJreImplementationVersionString());
                     upgradableJREs.add(jre);
                 }
             }
-        });
+        }
         response.setUpgradableJREs(upgradableJREs);
         return response;
     }
