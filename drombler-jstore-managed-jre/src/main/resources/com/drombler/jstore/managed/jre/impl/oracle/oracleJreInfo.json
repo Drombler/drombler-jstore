@@ -11,67 +11,81 @@
               "osName": "linux",
               "osArch": "x64",
               "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_linux-x64_bin.tar.gz",
-              "checksum": {
-                "algorithm": "sha256",
-                "hashValue": "7d2909a597574f1821903790bb0f31aaa57ab7348e3ae53639c850371450845d"
-              }
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "7d2909a597574f1821903790bb0f31aaa57ab7348e3ae53639c850371450845d"
+                }
+              ]
             },
             {
               "osName": "linux",
               "osArch": "x64",
               "headless": true,
               "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/serverjre-10.0.2_linux-x64_bin.tar.gz",
-              "checksum": {
-                "algorithm": "sha256",
-                "hashValue": "4ca492e0dd46c51bb3263d7347f6ede04fceb07fde3f01fed2c0336b18596c41"
-              }
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "4ca492e0dd46c51bb3263d7347f6ede04fceb07fde3f01fed2c0336b18596c41"
+                }
+              ]
             },
             {
               "osName": "osx",
               "osArch": "x64",
               "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_osx-x64_bin.tar.gz",
-              "checksum": {
-                "algorithm": "sha256",
-                "hashValue": "a0ccfa98028ecbfd8081fc865bb8d0b32b6fd7f815e5b9695853831af3ba0963"
-              }
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "a0ccfa98028ecbfd8081fc865bb8d0b32b6fd7f815e5b9695853831af3ba0963"
+                }
+              ]
             },
             {
               "osName": "windows",
               "osArch": "x64",
               "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_windows-x64_bin.tar.gz",
-              "checksum": {
-                "algorithm": "sha256",
-                "hashValue": "cc5362d17c8baaa84c6bc63bba79fe8c2ec3d2ff2a2ec239482ae0b7cf03887a"
-              }
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "cc5362d17c8baaa84c6bc63bba79fe8c2ec3d2ff2a2ec239482ae0b7cf03887a"
+                }
+              ]
             },
             {
               "osName": "windows",
               "osArch": "x64",
               "headless": true,
               "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/serverjre-10.0.2_windows-x64_bin.tar.gz",
-              "checksum": {
-                "algorithm": "sha256",
-                "hashValue": "d54f57d574a0eaac231f486d6b15fe6d3d3857d3df74789675f08eb13b61076f"
-              }
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "d54f57d574a0eaac231f486d6b15fe6d3d3857d3df74789675f08eb13b61076f"
+                }
+              ]
             },
             {
               "osName": "solaris",
               "osArch": "sparcv9",
               "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_solaris-sparcv9_bin.tar.gz",
-              "checksum": {
-                "algorithm": "sha256",
-                "hashValue": "20e422142d9b09b3261dedd3df63993f52634fc893220ae8a4815dbf1a095d4e"
-              }
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "20e422142d9b09b3261dedd3df63993f52634fc893220ae8a4815dbf1a095d4e"
+                }
+              ]
             },
             {
               "osName": "solaris",
               "osArch": "sparcv9",
               "headless": true,
               "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/serverjre-10.0.2_solaris-sparcv9_bin.tar.gz",
-              "checksum": {
-                "algorithm": "sha256",
-                "hashValue": "227205576b383dc5226a7f4cd1447f2087080e8f94c038c2fd153c3bf1bc260e"
-              }
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "227205576b383dc5226a7f4cd1447f2087080e8f94c038c2fd153c3bf1bc260e"
+                }
+              ]
             }
           ]
         },
@@ -126,6 +140,246 @@
       "javaSpecificationVersion": "8",
       "releases": [
         {
+          "jreVersion": "8u181-b13",
+          "releaseDate": "2018-07-17",
+          "platforms": [
+            {
+              "osName": "linux",
+              "osArch": "x86",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-linux-i586.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "5e2d3c0808480de058ad7b114113d029a76fa406f9402ae4d82555247473d3bb"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "85b1b4fb8b9ec6c4f7d51f53c31b20e2"
+                }
+              ]
+            },
+            {
+              "osName": "linux",
+              "osArch": "x64",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-linux-x64.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "0b26c7fcfad20029e6e0989e678efcd4a81f0fe502a478b4972215533867de1b"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "7681dd61646361856b16141c59bebd51"
+                }
+              ]
+            },
+            {
+              "osName": "linux",
+              "osArch": "x64",
+              "headless": true,
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/server-jre-8u181-linux-x64.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "678e798008c398be98ba9d39d5114a9b4151f9d3023ccdce8b56f94c5d450698"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "5c8092c606ef28c2e3ad850354a2c53a"
+                }
+              ]
+            },
+            {
+              "osName": "linux",
+              "osArch": "x86",
+              "headless": true,
+              "labels": [
+                "embedded"
+              ],
+              "url": "http://download.oracle.com/otn/java/ejdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/ejdk-8u181-linux-i586.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "34195b660101829d9ec08a35eb42cda95bf310ba4655203667ab3caf5c81fe1a"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "ddcdda8e797f0c552962148988bfe85f"
+                }
+              ]
+            },
+            {
+              "osName": "linux",
+              "osArch": "arm",
+              "labels": [
+                "embedded",
+                "v5",
+                "v6",
+                "v7",
+                "SoftFP",
+                "Little Endian"
+              ],
+              "url": "http://download.oracle.com/otn/java/ejdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/ejdk-8u181-linux-arm-sflt.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "be9af4445b68a71a195a434f45ec11eddacf143699bc90411d4c7ee4d3405fb8"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "9b524cd262005af74364b39af09cb825"
+                }
+              ]
+            },
+            {
+              "osName": "linux",
+              "osArch": "arm",
+              "labels": [
+                "embedded",
+                "v6",
+                "v7",
+                "VFP",
+                "HardFP",
+                "Little Endian"
+              ],
+              "url": "http://download.oracle.com/otn/java/ejdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/ejdk-8u181-linux-armv6-vfp-hflt.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "b991a257d4d7f42df45cc4154c42aa3c414128a607f034898cb99250506f396b"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "3eed95b78374d7bc4ccaf44333623c7b"
+                }
+              ]
+            },
+            {
+              "osName": "osx",
+              "osArch": "x64",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-macosx-x64.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "7d2e6275f77bfa0f0eaca03c6d48e27fa822abcae056d30293007978957ce3fc"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "905ddc5b478bd71ae0c5e8184ce5c2f6"
+                }
+              ]
+            },
+            {
+              "osName": "windows",
+              "osArch": "x86",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-windows-i586.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "dd6b4869219ec9005fd6d53766d628a54480edfea5d34687ed31b8bd064f2b4f"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "f3b2a08c5bc3f6ea5a137b8bd9fd2b58"
+                }
+              ]
+            },
+            {
+              "osName": "windows",
+              "osArch": "x64",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-windows-x64.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "4045e16ea023c68b8aa3818a4a200148850251830db6c57aaefb5c0f2b8e97c3"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "1164873058f82f1c12a56411d753f14b"
+                }
+              ]
+            },
+            {
+              "osName": "windows",
+              "osArch": "x64",
+              "headless": true,
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/server-jre-8u181-windows-x64.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "7799b9007760663da32a3b177a0b9ea42ec268afaa69dcf8518cdce5136c3768"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "1e69a9556f7e7f50516be17d24ad040e"
+                }
+              ]
+            },
+            {
+              "osName": "solaris",
+              "osArch": "sparcv9",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-solaris-sparcv9.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "33ce3c4acd663199e3b4a10c25ced15d3168794dd059b9509217c78e3867d57e"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "577049e81e576ce1d1ab464a968a9452"
+                }
+              ]
+            },
+            {
+              "osName": "solaris",
+              "osArch": "x64",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-solaris-x64.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "f18d04eb73583189bb554dd7ebe75d13706efe8be99f4d7b4b5a36f25b4ef27b"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "7a260d789cafc46cd8532c2973815619"
+                }
+              ]
+            },
+            {
+              "osName": "solaris",
+              "osArch": "sparcv9",
+              "headless": true,
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/server-jre-8u181-solaris-sparcv9.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "e7a362d3b2361a20d9a3e60336a2937fbbc89fb7cf6bed4206269a704f9446ac"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "ee5a5531b1f14336453004c5fc683fda"
+                }
+              ]
+            },
+            {
+              "osName": "solaris",
+              "osArch": "x64",
+              "headless": true,
+              "url": "http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/server-jre-8u181-solaris-x64.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "179ff2ddfaecbf30735546668b0daffe3c4fbda2f4ce22e3b73a052942d55fdb"
+                },
+                {
+                  "algorithm": "md5",
+                  "hashValue": "eae22bc187fb811610017a7f4b80173a"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "jreVersion": "8u171-b11",
           "releaseDate": "2018-04-17",
           "platforms": [
@@ -147,21 +401,37 @@
             },
             {
               "osName": "linux",
-              "osArch": "x64",
+              "osArch": "x86",
               "headless": true,
-              "labels": ["embedded"],
+              "labels": [
+                "embedded"
+              ],
               "url": "http://download.oracle.com/otn/java/ejdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/ejdk-8u171-linux-i586.tar.gz"
             },
             {
               "osName": "linux",
               "osArch": "arm",
-              "labels": ["embedded", "v5", "v6", "v7", "SoftFP", "Little Endian"],
+              "labels": [
+                "embedded",
+                "v5",
+                "v6",
+                "v7",
+                "SoftFP",
+                "Little Endian"
+              ],
               "url": "http://download.oracle.com/otn/java/ejdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/ejdk-8u171-linux-arm-sflt.tar.gz"
             },
             {
               "osName": "linux",
               "osArch": "arm",
-              "labels": ["embedded", "v6", "v7", "VFP", "HardFP", "Little Endian"],
+              "labels": [
+                "embedded",
+                "v6",
+                "v7",
+                "VFP",
+                "HardFP",
+                "Little Endian"
+              ],
               "url": "http://download.oracle.com/otn/java/ejdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/ejdk-8u171-linux-armv6-vfp-hflt.tar.gz"
             },
             {
