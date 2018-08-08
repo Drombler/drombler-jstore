@@ -4,6 +4,78 @@
       "javaSpecificationVersion": "10",
       "releases": [
         {
+          "jreVersion": "10.0.2+13",
+          "releaseDate": "2018-07-17",
+          "platforms": [
+            {
+              "osName": "linux",
+              "osArch": "x64",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_linux-x64_bin.tar.gz",
+              "checksum": {
+                "algorithm": "sha256",
+                "hashValue": "7d2909a597574f1821903790bb0f31aaa57ab7348e3ae53639c850371450845d"
+              }
+            },
+            {
+              "osName": "linux",
+              "osArch": "x64",
+              "headless": true,
+              "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/serverjre-10.0.2_linux-x64_bin.tar.gz",
+              "checksum": {
+                "algorithm": "sha256",
+                "hashValue": "4ca492e0dd46c51bb3263d7347f6ede04fceb07fde3f01fed2c0336b18596c41"
+              }
+            },
+            {
+              "osName": "osx",
+              "osArch": "x64",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_osx-x64_bin.tar.gz",
+              "checksum": {
+                "algorithm": "sha256",
+                "hashValue": "a0ccfa98028ecbfd8081fc865bb8d0b32b6fd7f815e5b9695853831af3ba0963"
+              }
+            },
+            {
+              "osName": "windows",
+              "osArch": "x64",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_windows-x64_bin.tar.gz",
+              "checksum": {
+                "algorithm": "sha256",
+                "hashValue": "cc5362d17c8baaa84c6bc63bba79fe8c2ec3d2ff2a2ec239482ae0b7cf03887a"
+              }
+            },
+            {
+              "osName": "windows",
+              "osArch": "x64",
+              "headless": true,
+              "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/serverjre-10.0.2_windows-x64_bin.tar.gz",
+              "checksum": {
+                "algorithm": "sha256",
+                "hashValue": "d54f57d574a0eaac231f486d6b15fe6d3d3857d3df74789675f08eb13b61076f"
+              }
+            },
+            {
+              "osName": "solaris",
+              "osArch": "sparcv9",
+              "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jre-10.0.2_solaris-sparcv9_bin.tar.gz",
+              "checksum": {
+                "algorithm": "sha256",
+                "hashValue": "20e422142d9b09b3261dedd3df63993f52634fc893220ae8a4815dbf1a095d4e"
+              }
+            },
+            {
+              "osName": "solaris",
+              "osArch": "sparcv9",
+              "headless": true,
+              "url": "http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/serverjre-10.0.2_solaris-sparcv9_bin.tar.gz",
+              "checksum": {
+                "algorithm": "sha256",
+                "hashValue": "227205576b383dc5226a7f4cd1447f2087080e8f94c038c2fd153c3bf1bc260e"
+              }
+            }
+          ]
+        },
+        {
           "jreVersion": "10.0.1+10",
           "releaseDate": "2018-04-17",
           "platforms": [
