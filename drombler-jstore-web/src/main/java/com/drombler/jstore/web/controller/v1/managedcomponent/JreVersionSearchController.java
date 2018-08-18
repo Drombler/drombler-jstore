@@ -3,6 +3,7 @@ package com.drombler.jstore.web.controller.v1.managedcomponent;
 import com.drombler.jstore.managed.jre.JreInfoManager;
 import com.drombler.jstore.model.JStoreException;
 import com.drombler.jstore.model.VersionedPlatform;
+import com.drombler.jstore.model.VersionedPlatformCategory;
 import io.swagger.annotations.Api;
 import org.drombler.jstore.protocol.json.JreVersionSearchRequest;
 import org.drombler.jstore.protocol.json.JreVersionSearchResponse;
@@ -46,9 +47,11 @@ public class JreVersionSearchController {
                 Optional<VersionedPlatform> latestUpgradableJREImplementationVersion = jreInfoManager.getLatestUpgradableJREImplementationVersion(request.getSystemInfo(), selectedJRE);
 
                 if (latestUpgradableJREImplementationVersion.isPresent()) {
+                    VersionedPlatform versionedPlatform = latestUpgradableJREImplementationVersion.get();
                     UpgradableJRE jre = new UpgradableJRE();
                     jre.setJreInfo(selectedJRE.getJreInfo());
-                    jre.setLatestUpgradableJREImplementationVersion(latestUpgradableJREImplementationVersion.get().getJreImplementationVersionString());
+                    jre.setLatestUpgradableJREImplementationVersion(versionedPlatform.getCategory().getJreImplementationVersionString());
+                    jre.getChecksums().addAll(versionedPlatform.getPlatform().getChecksums());
                     upgradableJREs.add(jre);
                 }
             }

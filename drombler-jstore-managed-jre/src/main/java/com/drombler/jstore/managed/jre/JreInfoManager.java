@@ -1,6 +1,7 @@
 package com.drombler.jstore.managed.jre;
 
 import com.drombler.jstore.model.VersionedPlatform;
+import com.drombler.jstore.model.VersionedPlatformCategory;
 import com.drombler.jstore.model.JStoreException;
 import org.drombler.jstore.protocol.json.SelectedJRE;
 import org.drombler.jstore.protocol.json.SystemInfo;
