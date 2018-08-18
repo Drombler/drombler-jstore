@@ -1,11 +1,7 @@
 package com.drombler.jstore.managed.jre.impl.oracle;
 
 import com.drombler.jstore.managed.jre.JreInfoManager;
-import com.drombler.jstore.model.PlatformKey;
-import com.drombler.jstore.model.VersionedPlatform;
-import com.drombler.jstore.model.JStoreErrorCode;
-import com.drombler.jstore.model.JStoreException;
-import com.drombler.jstore.model.TransactionalService;
+import com.drombler.jstore.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vdurmont.semver4j.Semver;
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +25,7 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
         VERSION_PARSER.put("8", new OracleJreImplementationVersion8Parser());
     }
 
-    private final Map<PlatformKey, VersionedPlatform> latestPlatformReleases = new HashMap<>();
+    private final Map<PlatformKey, VersionedPlatformCategory> latestPlatformReleases = new HashMap<>();
     private final Map<String, LocalDate> endOfLifeDates = new HashMap<>();
 
 
@@ -54,23 +50,23 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
         OracleJreImplementationVersionParser versionParser = VERSION_PARSER.get(javaSpecificationVersion);
 
         List<Release> releases = new ArrayList<>();
-//        Semver latestImplementationVersion = versionParser.parseJreImplementationVersion(jreImplementationInfo.getPlatformSubcategories().get(0).getJreVersion());
+//        Semver latestImplementationVersion = versionParser.parseJreImplementationVersion(jreImplementationInfo.getPlatforms().get(0).getJreVersion());
 
         for (Release release : jreImplementationInfo.getReleases()) {
             Semver jreImplementationVersion = versionParser.parseJreImplementationVersion(release.getJreVersion());
             for (Platform platform : release.getPlatforms()) {
                 PlatformKey platformKey = new PlatformKey(javaSpecificationVersion, platform.getOsName(), platform.getOsArch());
                 if (!latestPlatformReleases.containsKey(platformKey)) {
-                    latestPlatformReleases.put(platformKey, new VersionedPlatform(platformKey, jreImplementationVersion, release.getJreVersion(), release.getReleaseDate()));
+                    latestPlatformReleases.put(platformKey, new VersionedPlatformCategory(platformKey, jreImplementationVersion, release.getJreVersion(), release.getReleaseDate()));
                 }
-                VersionedPlatform versionedPlatform = latestPlatformReleases.get(platformKey);
-                if (!jreImplementationVersion.isEquivalentTo(versionedPlatform.getJreImplementationVersion())
-                        && jreImplementationVersion.isGreaterThan(versionedPlatform.getJreImplementationVersion())) {
-                    latestPlatformReleases.put(platformKey, new VersionedPlatform(platformKey, jreImplementationVersion, release.getJreVersion(),  release.getReleaseDate()));
+                VersionedPlatformCategory versionedPlatformCategory = latestPlatformReleases.get(platformKey);
+                if (!jreImplementationVersion.isEquivalentTo(versionedPlatformCategory.getJreImplementationVersion())
+                        && jreImplementationVersion.isGreaterThan(versionedPlatformCategory.getJreImplementationVersion())) {
+                    latestPlatformReleases.put(platformKey, new VersionedPlatformCategory(platformKey, jreImplementationVersion, release.getJreVersion(), release.getReleaseDate()));
                 }
 
-                if (jreImplementationVersion.isEquivalentTo(versionedPlatform.getJreImplementationVersion())) {
-                    versionedPlatform.getPlatformSubcategories().add(platform);
+                if (jreImplementationVersion.isEquivalentTo(versionedPlatformCategory.getJreImplementationVersion())) {
+                    versionedPlatformCategory.getPlatforms().add(platform);
                 }
             }
         }
@@ -83,32 +79,26 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
 
     @Override
     public Optional<VersionedPlatform> getLatestUpgradableJREImplementationVersion(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException {
-        String javaSpecificationVersion = selectedJRE.getJreInfo().getJavaSpecificationVersion();
-        if (!VERSION_PARSER.containsKey(javaSpecificationVersion)) {
-            throw new JStoreException(JStoreErrorCode.JSTORE_UNSUPPORTED_JAVA_SPECIFICATION_VERSION, "Unsupported Java specification version: " + javaSpecificationVersion);
-        }
-        OracleJreImplementationVersionParser versionParser = VERSION_PARSER.get(javaSpecificationVersion);
-        Semver jreImplementationVersion = StringUtils.isEmpty(selectedJRE.getInstalledImplementationVersion()) ? null : versionParser.parseJreImplementationVersion(selectedJRE.getInstalledImplementationVersion());
-        PlatformKey platformKey = new PlatformKey(javaSpecificationVersion, systemInfo.getOsName(), systemInfo.getOsArch());
-
-        if (latestPlatformReleases.containsKey(platformKey)) {
-            VersionedPlatform versionedPlatform = latestPlatformReleases.get(platformKey);
-            if (jreImplementationVersion == null ||
-                    (!jreImplementationVersion.isEquivalentTo(versionedPlatform.getJreImplementationVersion())
-                            && versionedPlatform.getJreImplementationVersion().isGreaterThan(jreImplementationVersion))) {
-                return Optional.of(versionedPlatform);
-            }
-        }
-        return Optional.empty();
+        return findLatestUpgradableJrePlatform(systemInfo, selectedJRE);
     }
 
     @Override
     public Optional<String> getLatestUpgradableJreUrl(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException {
-        Optional<Platform> foundPlatform = findLatestUpgradableJre(systemInfo, selectedJRE);
-        return foundPlatform.map(Platform::getUrl);
+        Optional<VersionedPlatform> foundPlatform = findLatestUpgradableJrePlatform(systemInfo, selectedJRE);
+        return foundPlatform.map(versionedPlatform -> versionedPlatform.getPlatform().getUrl());
     }
 
-    private Optional<Platform> findLatestUpgradableJre(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException {
+    private Optional<VersionedPlatform> findLatestUpgradableJrePlatform(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException {
+        Optional<VersionedPlatformCategory> latestUpgradableJREImplementationVersion = findLatestUpgradableJrePlatformCategory(systemInfo, selectedJRE);
+        if (latestUpgradableJREImplementationVersion.isPresent()) {
+            VersionedPlatformCategory versionedPlatformCategory = latestUpgradableJREImplementationVersion.get();
+            return findPlatform(systemInfo, versionedPlatformCategory);
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private Optional<VersionedPlatformCategory> findLatestUpgradableJrePlatformCategory(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException {
         String javaSpecificationVersion = selectedJRE.getJreInfo().getJavaSpecificationVersion();
         if (!VERSION_PARSER.containsKey(javaSpecificationVersion)) {
             throw new JStoreException(JStoreErrorCode.JSTORE_UNSUPPORTED_JAVA_SPECIFICATION_VERSION, "Unsupported Java specification version: " + javaSpecificationVersion);
@@ -118,33 +108,36 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
         PlatformKey platformKey = new PlatformKey(javaSpecificationVersion, systemInfo.getOsName(), systemInfo.getOsArch());
 
         if (latestPlatformReleases.containsKey(platformKey)) {
-            VersionedPlatform versionedPlatform = latestPlatformReleases.get(platformKey);
+            VersionedPlatformCategory versionedPlatformCategory = latestPlatformReleases.get(platformKey);
             if (jreImplementationVersion == null ||
-                    (!jreImplementationVersion.isEquivalentTo(versionedPlatform.getJreImplementationVersion())
-                            && versionedPlatform.getJreImplementationVersion().isGreaterThan(jreImplementationVersion))) {
-                return findPlatform(systemInfo, versionedPlatform);
-
+                    (!jreImplementationVersion.isEquivalentTo(versionedPlatformCategory.getJreImplementationVersion())
+                            && versionedPlatformCategory.getJreImplementationVersion().isGreaterThan(jreImplementationVersion))) {
+                return Optional.of(versionedPlatformCategory);
             }
         }
         return Optional.empty();
     }
 
-    private Optional<Platform> findPlatform(SystemInfo systemInfo, VersionedPlatform versionedPlatform) {
+    private Optional<VersionedPlatform> findPlatform(SystemInfo systemInfo, VersionedPlatformCategory versionedPlatformCategory) {
         Platform foundPlatform = null;
-        for (Platform platform : versionedPlatform.getPlatformSubcategories()) {
+        for (Platform platform : versionedPlatformCategory.getPlatforms()) {
             // non-server JREs should run on headless platforms, but non-headless platforms can require the full JRE
-            if (isHeadlessSupported(systemInfo)){
+            if (isHeadlessSupported(systemInfo)) {
                 foundPlatform = findPlatformServerJreSupported(platform, foundPlatform, systemInfo);
             } else {
                 foundPlatform = findPlatformServerJreNotSupported(platform, foundPlatform, systemInfo);
             }
         }
-        return Optional.ofNullable(foundPlatform);
+        if (foundPlatform != null){
+            return Optional.of(new VersionedPlatform(versionedPlatformCategory, foundPlatform));
+        } else {
+            return Optional.empty();
+        }
     }
 
     private Platform findPlatformServerJreNotSupported(Platform platform, Platform foundPlatform, SystemInfo systemInfo) {
-        if (! isServerJre(platform)){
-            if (foundPlatform == null || isBetterLabelMatch(platform, foundPlatform, systemInfo)){
+        if (!isServerJre(platform)) {
+            if (foundPlatform == null || isBetterLabelMatch(platform, foundPlatform, systemInfo)) {
                 foundPlatform = platform;
             }
         }
@@ -153,18 +146,18 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
 
     private Platform findPlatformServerJreSupported(Platform platform, Platform foundPlatform, SystemInfo systemInfo) {
         if (isServerJre(platform)) {
-            if (foundPlatform == null || ! isServerJre(foundPlatform)){
+            if (foundPlatform == null || !isServerJre(foundPlatform)) {
                 foundPlatform = platform;
             } else {
-                if (isBetterLabelMatch(platform, foundPlatform, systemInfo)){
+                if (isBetterLabelMatch(platform, foundPlatform, systemInfo)) {
                     foundPlatform = platform;
                 }
             }
         } else {
-            if (foundPlatform == null){
+            if (foundPlatform == null) {
                 foundPlatform = platform;
             } else {
-                if (! isServerJre(foundPlatform) && isBetterLabelMatch(platform, foundPlatform, systemInfo)){
+                if (!isServerJre(foundPlatform) && isBetterLabelMatch(platform, foundPlatform, systemInfo)) {
                     foundPlatform = platform;
                 }
             }
