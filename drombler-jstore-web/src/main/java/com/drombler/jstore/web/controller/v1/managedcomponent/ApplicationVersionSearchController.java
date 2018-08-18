@@ -1,5 +1,6 @@
 package com.drombler.jstore.web.controller.v1.managedcomponent;
 
+import com.drombler.jstore.web.controller.v1.managedcomponent.converter.SystemInfoNormalizer;
 import io.swagger.annotations.Api;
 import org.drombler.jstore.protocol.json.ApplicationVersionSearchRequest;
 import org.drombler.jstore.protocol.json.ApplicationVersionSearchResponse;
@@ -23,6 +24,9 @@ public class ApplicationVersionSearchController {
 
     @PostMapping
     public ApplicationVersionSearchResponse startApplicationVersionSearch(@RequestBody ApplicationVersionSearchRequest request) {
+        SystemInfoNormalizer systemInfoNormalizer = new SystemInfoNormalizer();
+        systemInfoNormalizer.normalizeSystemInfo(request.getSystemInfo());
+
         ApplicationVersionSearchResponse response = new ApplicationVersionSearchResponse();
         List<UpgradableApplication> upgradableApplications = request.getSelectedApplications().stream()
                 .map(selectedApplication -> {
