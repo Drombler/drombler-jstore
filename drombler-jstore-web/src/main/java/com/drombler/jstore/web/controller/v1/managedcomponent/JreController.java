@@ -6,10 +6,8 @@ import com.drombler.jstore.model.JStoreException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.drombler.jstore.protocol.json.JreInfo;
-import org.drombler.jstore.protocol.json.SelectedJRE;
-import org.drombler.jstore.protocol.json.SystemInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -25,37 +23,21 @@ public class JreController {
     @Autowired
     private List<JreInfoManager> jreVersionManagers;
 
-    @GetMapping(path = "/{jreVendorId}/{javaSpecificationVersion}/{osName}/{osArch}")
-    @ApiOperation("Gets the application package file.")
-    public RedirectView getApplication(
+    @GetMapping(path = "/{jreVendorId}/{jreImplementationId}")
+    @ApiOperation("Gets the JRE package file.")
+    public RedirectView getJRE(
+//            @ApiParam(value = "Oracle license agreement", required = true, example = "accept-securebackup-cookie") @RequestHeader(value="oraclelicense") String oraclelicense,
             @ApiParam(value = "The JRE vendor id", required = true, example = "oracle") @PathVariable("jreVendorId") String jreVendorId,
-            @ApiParam(value = "The Java specification version", required = true, example = "8") @PathVariable("javaSpecificationVersion") String javaSpecificationVersion,
-            @ApiParam(value = "The OS name", required = true, example = "windows") @PathVariable("osName") String osName,
-            @ApiParam(value = "The OS architecture", required = true, example = "x64") @PathVariable("osArch") String osArch,
-            @ApiParam(value = "The currently installed JRE version", example = "8u161") @RequestParam(value = "installedImplementationVersion", required = false) String installedImplementationVersion,
-            @ApiParam(value = "true, if a server version is preferred, else false", example = "false") @RequestParam(value = "headless", required = false) Boolean headless
+            @ApiParam(value = "The JRE implementation id", required = true, example = "jre-10.0.2_linux-x64_bin.tar.gz") @PathVariable("jreImplementationId") String jreImplementationId
     ) throws JStoreException {
-
-        SelectedJRE selectedJRE = new SelectedJRE();
-        JreInfo jreInfo = new JreInfo();
-        jreInfo.setJreVendorId(jreVendorId);
-        jreInfo.setJavaSpecificationVersion(javaSpecificationVersion);
-
-
-        selectedJRE.setJreInfo(jreInfo);
-        selectedJRE.setInstalledImplementationVersion(installedImplementationVersion);
-
-        SystemInfo systemInfo = new SystemInfo();
-        systemInfo.setOsName(osName);
-        systemInfo.setOsArch(osArch);
-        systemInfo.setHeadless(headless);
-
+//        Assert.hasText(oraclelicense, "oraclelicense");
+//        Assert.isTrue(oraclelicense.equals("accept-securebackup-cookie"), "unsupported oraclelicense value");
         String latestUpgradableJreUrl = jreVersionManagers.stream()
                 .filter(jreInfoManager -> jreInfoManager.supportsVendorId(jreVendorId.toLowerCase().trim()))
                 .findFirst()
                 .orElseThrow(() -> new JStoreException(JStoreErrorCode.JSTORE_UNSUPPORTED_JRE_VENDOR, "Unsupported JRE vendor: " + jreVendorId))
-                .getLatestUpgradableJreUrl(systemInfo, selectedJRE)
-                .orElseThrow(() -> new JStoreException(JStoreErrorCode.JSTORE_NO_UPGRADEABLE_JRE_FOUND, "No upgradable JRE found!"));
+                .getLatestUpgradableJreUrl(jreImplementationId)
+                .orElseThrow(() -> new JStoreException(JStoreErrorCode.JSTORE_JRE_IMPLEMENTATION_NOT_FOUND, "No JRE implementation with id: " + jreImplementationId + " found for vendor: " + jreVendorId + "!"));
         return new RedirectView(latestUpgradableJreUrl);
 
     }

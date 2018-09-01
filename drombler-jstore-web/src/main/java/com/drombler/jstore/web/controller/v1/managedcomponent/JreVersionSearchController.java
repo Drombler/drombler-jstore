@@ -4,6 +4,7 @@ import com.drombler.jstore.managed.jre.JreInfoManager;
 import com.drombler.jstore.model.JStoreException;
 import com.drombler.jstore.model.VersionedPlatform;
 import com.drombler.jstore.model.VersionedPlatformCategory;
+import com.drombler.jstore.web.controller.v1.managedcomponent.converter.SystemInfoNormalizer;
 import io.swagger.annotations.Api;
 import org.drombler.jstore.protocol.json.JreVersionSearchRequest;
 import org.drombler.jstore.protocol.json.JreVersionSearchResponse;
@@ -36,6 +37,9 @@ public class JreVersionSearchController {
 
     @PostMapping
     public JreVersionSearchResponse startJreVersionSearch(@RequestBody JreVersionSearchRequest request) throws JStoreException {
+        SystemInfoNormalizer systemInfoNormalizer = new SystemInfoNormalizer();
+        systemInfoNormalizer.normalizeSystemInfo(request.getSystemInfo());
+
         JreVersionSearchResponse response = new JreVersionSearchResponse();
         List<UpgradableJRE> upgradableJREs = new ArrayList<>();
         for (SelectedJRE selectedJRE : request.getSelectedJREs()) {
@@ -51,6 +55,8 @@ public class JreVersionSearchController {
                     UpgradableJRE jre = new UpgradableJRE();
                     jre.setJreInfo(selectedJRE.getJreInfo());
                     jre.setLatestUpgradableJREImplementationVersion(versionedPlatform.getCategory().getJreImplementationVersionString());
+                    jre.setJreImplementationId(versionedPlatform.getJreImplementationId());
+                    jre.setJreImplementationFileName(versionedPlatform.getJreImplementationFileName());
                     jre.getChecksums().addAll(versionedPlatform.getPlatform().getChecksums());
                     upgradableJREs.add(jre);
                 }
