@@ -13,9 +13,11 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+import static org.drombler.jstore.web.controller.RestControllerUtils.MANAGED_COMPONENTS_V1_PATH;
+
 @Api(tags = {"JreController V1"})
 @RestController("JreControllerV1")
-@RequestMapping(path = RestControllerUtils.MANAGED_COMPONENTS_V1_PATH + "/jres")
+@RequestMapping(path = MANAGED_COMPONENTS_V1_PATH + "/jres")
 public class JreController {
 
     @Autowired

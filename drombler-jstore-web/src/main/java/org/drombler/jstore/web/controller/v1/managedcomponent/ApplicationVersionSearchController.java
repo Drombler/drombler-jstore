@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.drombler.jstore.web.controller.RestControllerUtils.MANAGED_COMPONENTS_V1_PATH;
+
 @Api(tags = {"ApplicationVersionSearchController V1"})
 @RestController("ApplicationVersionSearchControllerV1")
-@RequestMapping(path = RestControllerUtils.MANAGED_COMPONENTS_V1_PATH + "/application-version-search", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(path = MANAGED_COMPONENTS_V1_PATH + "/application-version-search", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ApplicationVersionSearchController {
 
     @PostMapping
