@@ -55,6 +55,8 @@ public class JreVersionSearchController {
                     UpgradableJRE jre = new UpgradableJRE();
                     jre.setJreInfo(selectedJRE.getJreInfo());
                     jre.setLatestUpgradableJREImplementationVersion(versionedPlatform.getCategory().getJreImplementationVersionString());
+                    jre.setJreImplementationId(versionedPlatform.getJreImplementationId());
+                    jre.setJreImplementationFileName(versionedPlatform.getJreImplementationFileName());
                     jre.getChecksums().addAll(versionedPlatform.getPlatform().getChecksums());
                     upgradableJREs.add(jre);
                 }

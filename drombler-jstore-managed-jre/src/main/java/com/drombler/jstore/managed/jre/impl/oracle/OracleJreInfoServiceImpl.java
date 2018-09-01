@@ -12,7 +12,9 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @TransactionalService
 public class OracleJreInfoServiceImpl implements JreInfoManager {
@@ -27,6 +29,7 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
 
     private final Map<PlatformKey, VersionedPlatformCategory> latestPlatformReleases = new HashMap<>();
     private final Map<String, LocalDate> endOfLifeDates = new HashMap<>();
+    private final Map<String, String> idURLMap = new HashMap<>();
 
 
     @Autowired
@@ -49,7 +52,7 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
         endOfLifeDates.put(javaSpecificationVersion, jreImplementationInfo.getEndOfLifeDate());
         OracleJreImplementationVersionParser versionParser = VERSION_PARSER.get(javaSpecificationVersion);
 
-        List<Release> releases = new ArrayList<>();
+//        List<Release> releases = new ArrayList<>();
 //        Semver latestImplementationVersion = versionParser.parseJreImplementationVersion(jreImplementationInfo.getPlatforms().get(0).getJreVersion());
 
         for (Release release : jreImplementationInfo.getReleases()) {
@@ -62,12 +65,18 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
                 VersionedPlatformCategory versionedPlatformCategory = latestPlatformReleases.get(platformKey);
                 if (!jreImplementationVersion.isEquivalentTo(versionedPlatformCategory.getJreImplementationVersion())
                         && jreImplementationVersion.isGreaterThan(versionedPlatformCategory.getJreImplementationVersion())) {
+                    // replace with newer version for this platform
                     latestPlatformReleases.put(platformKey, new VersionedPlatformCategory(platformKey, jreImplementationVersion, release.getJreVersion(), release.getReleaseDate()));
                 }
 
                 if (jreImplementationVersion.isEquivalentTo(versionedPlatformCategory.getJreImplementationVersion())) {
                     versionedPlatformCategory.getPlatforms().add(platform);
                 }
+                String jreImplementationId = getId(versionedPlatformCategory, platform);
+                if (idURLMap.containsKey(jreImplementationId)) {
+                    throw new IllegalStateException("The jreImplementationId is not unique: " + jreImplementationId);
+                }
+                idURLMap.put(jreImplementationId, platform.getUrl());
             }
         }
     }
@@ -83,9 +92,8 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
     }
 
     @Override
-    public Optional<String> getLatestUpgradableJreUrl(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException {
-        Optional<VersionedPlatform> foundPlatform = findLatestUpgradableJrePlatform(systemInfo, selectedJRE);
-        return foundPlatform.map(versionedPlatform -> versionedPlatform.getPlatform().getUrl());
+    public Optional<String> getLatestUpgradableJreUrl(String jreImplementationId) throws JStoreException {
+        return Optional.ofNullable(idURLMap.get(jreImplementationId));
     }
 
     private Optional<VersionedPlatform> findLatestUpgradableJrePlatform(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException {
@@ -128,11 +136,21 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
                 foundPlatform = findPlatformServerJreNotSupported(platform, foundPlatform, systemInfo);
             }
         }
-        if (foundPlatform != null){
-            return Optional.of(new VersionedPlatform(versionedPlatformCategory, foundPlatform));
+        if (foundPlatform != null) {
+            String id = getId(versionedPlatformCategory, foundPlatform);
+            String fileName = getFileName(foundPlatform.getUrl());
+            return Optional.of(new VersionedPlatform(versionedPlatformCategory, foundPlatform, id, fileName));
         } else {
             return Optional.empty();
         }
+    }
+
+    private String getId(VersionedPlatformCategory versionedPlatformCategory, Platform platform) {
+        return getFileName(platform.getUrl());
+    }
+
+    private String getFileName(String url) {
+        return url.substring(url.lastIndexOf("/") + 1);
     }
 
     private Platform findPlatformServerJreNotSupported(Platform platform, Platform foundPlatform, SystemInfo systemInfo) {

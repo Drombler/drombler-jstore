@@ -13,5 +13,5 @@ public interface JreInfoManager {
 
     Optional<VersionedPlatform> getLatestUpgradableJREImplementationVersion(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException;
 
-    Optional<String> getLatestUpgradableJreUrl(SystemInfo systemInfo, SelectedJRE selectedJRE) throws JStoreException;
+    Optional<String> getLatestUpgradableJreUrl(String jreImplementationId) throws JStoreException;
 }
