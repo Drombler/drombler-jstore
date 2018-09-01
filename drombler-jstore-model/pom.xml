@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.drombler.jstore</groupId>
+        <groupId>org.drombler.jstore</groupId>
         <artifactId>drombler-jstore-parent</artifactId>
         <version>0.3-SNAPSHOT</version>
         <relativePath>../drombler-jstore-parent/pom.xml</relativePath>
