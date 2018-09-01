@@ -27,7 +27,8 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage(RestControllerUtils.class.getPackage().getName()))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(createApiInfo());
+                .apiInfo(createApiInfo())
+                .groupName(RestControllerUtils.V1_PATH_SEGMENT);
     }
 
     private ApiInfo createApiInfo() {
