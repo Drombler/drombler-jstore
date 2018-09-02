@@ -38,9 +38,19 @@
     </licenses>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>drombler-nexus-snapshots</id>
+            <name>Drombler Nexus Snapshots Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>drombler-nexus-releases</id>
+            <name>Drombler Nexus Release Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/releases/</url>
+        </repository>
         <site>
             <id>github</id>
-            <name>Drombler JStore Client Service</name>
+            <name>Drombler JStore</name>
             <url>${distributionManagement.parent.url}/${project.artifactId}/</url>
         </site>
     </distributionManagement>
@@ -57,17 +67,19 @@
         </scm.parent.developerConnection>
         <scm.parent.url>https://github.com/Drombler/drombler-jstore</scm.parent.url>
         <!-- URLs to use with the standard site plugin with the git wagon -->
-        <!--<distributionManagement.base.url>github:http://drombler.github.io/drombler-jstore-client-service/${project.version}</distributionManagement.base.url>-->
-        <!--<distributionManagement.parent.url>${distributionManagement.base.url}/docs/site</distributionManagement.parent.url>-->
+        <distributionManagement.base.url>github:http://drombler.github.io/drombler-jstore/${project.version}
+        </distributionManagement.base.url>
+        <distributionManagement.parent.url>${distributionManagement.base.url}/docs/site
+        </distributionManagement.parent.url>
         <!-- URL to use with the GitHub site plugin -->
         <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
-        <!--<url.parent>http://www.drombler.org/drombler-fx/${project.version}/docs/site</url.parent>-->
+        <!--<url.parent>http://www.drombler.org/drombler-jstore/${project.version}/docs/site</url.parent>-->
 
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
-        <drombler-jstore-protocol.version>0.3-SNAPSHOT</drombler-jstore-protocol.version>
+        <drombler-jstore-protocol.version>0.3</drombler-jstore-protocol.version>
     </properties>
 
     <!-- Not inherited!?? -->
