@@ -7,3 +7,6 @@ For more background information see: http://www.drombler.org/drombler-jstore
 
 [![Join the chat at https://gitter.im/Drombler/drombler-jstore](https://badges.gitter.im/Drombler/drombler-jstore.svg)](https://gitter.im/Drombler/drombler-jstore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+org.drombler.jstore.JStoreApp is a Spring Boot application.
+
+Swagger: http://localhost:5000/swagger-ui.html
