@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.drombler.jstore.web.controller.RestControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -26,12 +27,14 @@ public class JreController {
     @GetMapping(path = "/{jreVendorId}/{jreImplementationId}")
     @ApiOperation("Gets the JRE package file.")
     public RedirectView getJRE(
-//            @ApiParam(value = "Oracle license agreement", required = true, example = "accept-securebackup-cookie") @RequestHeader(value="oraclelicense") String oraclelicense,
+//            @ApiParam(value = "Oracle license agreement", required = true, example = "accept-securebackup-cookie") @CookieValue(value="oraclelicense") String oraclelicense,
+//            @ApiParam(value = "Oracle license agreement", required = true, example = "oraclelicense=accept-securebackup-cookie") @RequestHeader(value="Cookie") String cookie,
             @ApiParam(value = "The JRE vendor id", required = true, example = "oracle") @PathVariable("jreVendorId") String jreVendorId,
             @ApiParam(value = "The JRE implementation id", required = true, example = "jre-10.0.2_linux-x64_bin.tar.gz") @PathVariable("jreImplementationId") String jreImplementationId
     ) throws JStoreException {
 //        Assert.hasText(oraclelicense, "oraclelicense");
 //        Assert.isTrue(oraclelicense.equals("accept-securebackup-cookie"), "unsupported oraclelicense value");
+//        Assert.isTrue(cookie.contains("oraclelicense=accept-securebackup-cookie"), "Cookie");
         String latestUpgradableJreUrl = jreVersionManagers.stream()
                 .filter(jreInfoManager -> jreInfoManager.supportsVendorId(jreVendorId.toLowerCase().trim()))
                 .findFirst()
