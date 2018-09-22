@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.drombler.jstore</groupId>
+        <groupId>org.drombler.jstore</groupId>
         <artifactId>drombler-jstore-parent</artifactId>
-        <version>0.2</version>
+        <version>0.3</version>
         <relativePath>../drombler-jstore-parent/pom.xml</relativePath>
     </parent>
     <artifactId>drombler-jstore-web</artifactId>
@@ -39,6 +39,22 @@
 
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-integration-nexus</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-managed-jre</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.drombler.jstore.protocol</groupId>
             <artifactId>drombler-jstore-protocol</artifactId>
         </dependency>
@@ -46,7 +62,6 @@
         <dependency>
             <groupId>ch.sbb</groupId>
             <artifactId>springboot-graceful-shutdown</artifactId>
-            <version>2.0</version>
         </dependency>
 
         <dependency>
@@ -108,6 +123,7 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 </project>

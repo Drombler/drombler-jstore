@@ -2,15 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.drombler</groupId>
-        <artifactId>drombler-css-parent</artifactId>
-        <version>1.1</version>
+        <groupId>org.drombler</groupId>
+        <artifactId>drombler-oss-parent</artifactId>
+        <version>3.1</version>
         <relativePath />
     </parent>
 
-    <groupId>com.drombler.jstore</groupId>
+    <groupId>org.drombler.jstore</groupId>
     <artifactId>drombler-jstore-parent</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
     <packaging>pom</packaging>
 
     <name>Drombler JStore - Parent</name>
@@ -37,9 +37,19 @@
     </licenses>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>drombler-nexus-snapshots</id>
+            <name>Drombler Nexus Snapshots Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>drombler-nexus-releases</id>
+            <name>Drombler Nexus Release Repository</name>
+            <url>http://localhost:8081/nexus/content/repositories/releases/</url>
+        </repository>
         <site>
             <id>github</id>
-            <name>Drombler JStore Client Service</name>
+            <name>Drombler JStore</name>
             <url>${distributionManagement.parent.url}/${project.artifactId}/</url>
         </site>
     </distributionManagement>
@@ -56,20 +66,19 @@
         </scm.parent.developerConnection>
         <scm.parent.url>https://github.com/Drombler/drombler-jstore</scm.parent.url>
         <!-- URLs to use with the standard site plugin with the git wagon -->
-        <!--<distributionManagement.base.url>github:http://drombler.github.io/drombler-jstore-client-service/${project.version}</distributionManagement.base.url>-->
-        <!--<distributionManagement.parent.url>${distributionManagement.base.url}/docs/site</distributionManagement.parent.url>-->
+        <distributionManagement.base.url>github:http://drombler.github.io/drombler-jstore/${project.version}
+        </distributionManagement.base.url>
+        <distributionManagement.parent.url>${distributionManagement.base.url}/docs/site
+        </distributionManagement.parent.url>
         <!-- URL to use with the GitHub site plugin -->
         <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
-        <!--<url.parent>http://www.drombler.org/drombler-fx/${project.version}/docs/site</url.parent>-->
+        <!--<url.parent>http://www.drombler.org/drombler-jstore/${project.version}/docs/site</url.parent>-->
 
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
-        <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
-        <!--<springfox-swagger.version>2.9.0</springfox-swagger.version>-->
-        <springfox-swagger.version>2.8.0</springfox-swagger.version>
-        <drombler-jstore-protocol.version>0.1</drombler-jstore-protocol.version>
+        <drombler-jstore-protocol.version>0.3</drombler-jstore-protocol.version>
     </properties>
 
     <!-- Not inherited!?? -->
@@ -77,45 +86,18 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <!-- Import dependency management from Spring Boot -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-
-
             <dependency>
                 <groupId>org.drombler.jstore.protocol</groupId>
                 <artifactId>drombler-jstore-protocol</artifactId>
                 <version>${drombler-jstore-protocol.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${springfox-swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${springfox-swagger.version}</version>
+                <groupId>com.vdurmont</groupId>
+                <artifactId>semver4j</artifactId>
+                <version>2.2.0</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
