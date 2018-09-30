@@ -1,6 +1,51 @@
 {
   "jreImplementationInfos": [
     {
+      "javaSpecificationVersion": "11",
+      "releases": [
+        {
+          "jreVersion": "11+28",
+          "releaseDate": "2018-09-25",
+          "platforms": [
+            {
+              "osName": "linux",
+              "osArch": "x64",
+              "url": "https://download.java.net/java/ga/jdk11/openjdk-11_linux-x64_bin.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "3784cfc4670f0d4c5482604c7c513beb1a92b005f569df9bf100e8bef6610f2e"
+                }
+              ]
+            },
+            {
+              "osName": "osx",
+              "osArch": "x64",
+              "url": "https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "6b969d2df6a9758d9458f5ba47939250e848dfba8b49e41c935cf210606b6d38"
+                }
+              ]
+            },
+            {
+              "osName": "windows",
+              "osArch": "x64",
+              "url": "https://download.java.net/java/ga/jdk11/openjdk-11_windows-x64_bin.zip",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "fde3b28ca31b86a889c37528f17411cd0b9651beb6fa76cac89a223417910f4b"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "endOfLifeDate": "2019-03-31"
+    },
+    {
       "javaSpecificationVersion": "10",
       "releases": [
         {
