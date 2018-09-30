@@ -23,6 +23,7 @@ public class OracleJreInfoServiceImpl implements JreInfoManager {
     private static final Map<String, OracleJreImplementationVersionParser> VERSION_PARSER = new HashMap<>();
 
     static {
+        VERSION_PARSER.put("11", new OracleJreImplementationVersion11Parser());
         VERSION_PARSER.put("10", new OracleJreImplementationVersion10Parser());
         VERSION_PARSER.put("8", new OracleJreImplementationVersion8Parser());
     }
