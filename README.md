@@ -10,4 +10,5 @@ For more background information see: http://www.drombler.org/drombler-jstore
 org.drombler.jstore.JStoreApp is a Spring Boot application.
 
 Local Swagger: http://localhost:5000/swagger-ui.html
+
 Staging Swagger: http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/swagger-ui.html
