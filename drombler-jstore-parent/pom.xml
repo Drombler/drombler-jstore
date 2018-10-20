@@ -10,7 +10,7 @@
 
     <groupId>org.drombler.jstore</groupId>
     <artifactId>drombler-jstore-parent</artifactId>
-    <version>0.4</version>
+    <version>0.5</version>
     <packaging>pom</packaging>
 
     <name>Drombler JStore - Parent</name>
@@ -78,7 +78,7 @@
 
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
-        <drombler-jstore-protocol.version>0.3</drombler-jstore-protocol.version>
+        <drombler-jstore-protocol.version>0.4</drombler-jstore-protocol.version>
     </properties>
 
     <!-- Not inherited!?? -->
