@@ -41,7 +41,7 @@ Drombler JStore manages JREs (Java Runtime Environments).
 Currently only JREs provided by Oracle are supported.
 In the future this project could also support other JRE vendors.
 
-The currently supported Oracle JREs you can find 
+The currently supported Oracle JREs can be found 
 [here](https://github.com/Drombler/drombler-jstore/blob/develop/drombler-jstore-managed-jre/src/main/resources/org/drombler/jstore/managed/jre/impl/oracle/oracleJreInfo.json).
 
 #### JRE Version Search
