@@ -44,6 +44,7 @@ In the future this project could also support other JRE vendors.
 The currently supported Oracle JREs you can find 
 [here](https://github.com/Drombler/drombler-jstore/blob/develop/drombler-jstore-managed-jre/src/main/resources/org/drombler/jstore/managed/jre/impl/oracle/oracleJreInfo.json).
 
+#### JRE Version Search
 To search for JRE versions for a particular platform the following REST service can be used:
 
 [POST /managed-components/jre-version-search](http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/swagger-ui.html#/JreVersionSearchController_V1)
@@ -127,7 +128,10 @@ The response will look something like this (please not that the specification is
   ]
 }
 ```
-With the specified `jreVendorId` and `jreImplementationId` you can then download the JRE like this:
+
+#### JRE Download
+
+With the specified `jreVendorId` and the returned `jreImplementationId` you can then download the JRE like this:
 
 [GET /managed-components/jres/{jreVendorId}/{jreImplementationId}](http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/swagger-ui.html#/JreController_V1)
 
