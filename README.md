@@ -142,6 +142,6 @@ http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/webresources/v1/ma
 
 If the `jreImplementationId` is not a proper file name you can use the `jreImplementationFileName` property to get a valid file name.
 
-You can validate the downloaded files using the checksums provided in the search response.
+You can validate the downloaded files using the `checksums` provided in the search response.
 
 You can then use the `latestUpgradableJREImplementationVersion` in the next search as the value for the property `installedImplementationVersion`.
