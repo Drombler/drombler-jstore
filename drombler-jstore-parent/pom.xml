@@ -10,7 +10,7 @@
 
     <groupId>org.drombler.jstore</groupId>
     <artifactId>drombler-jstore-parent</artifactId>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Drombler JStore - Parent</name>
