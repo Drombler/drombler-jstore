@@ -4,6 +4,46 @@
       "javaSpecificationVersion": "11",
       "releases": [
         {
+          "jreVersion": "11.0.1+13",
+          "releaseDate": "2018-10-16",
+          "sourceCodeTagURL": "https://hg.openjdk.java.net/jdk-updates/jdk11u/file/8513ac27b651",
+          "platforms": [
+            {
+              "osName": "linux",
+              "osArch": "x64",
+              "url": "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_linux-x64_bin.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "7a6bb980b9c91c478421f865087ad2d69086a0583aeeb9e69204785e8e97dcfd"
+                }
+              ]
+            },
+            {
+              "osName": "osx",
+              "osArch": "x64",
+              "url": "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_osx-x64_bin.tar.gz",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "fa07eee08fa0f3de541ee1770de0cdca2ae3876f3bd78c329f27e85c287cd070"
+                }
+              ]
+            },
+            {
+              "osName": "windows",
+              "osArch": "x64",
+              "url": "https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_windows-x64_bin.zip",
+              "checksums": [
+                {
+                  "algorithm": "sha256",
+                  "hashValue": "289dd06e06c2cbd5e191f2d227c9338e88b6963fd0c75bceb9be48f0394ede21"
+                }
+              ]
+            }
+          ]
+        },
+        {
           "jreVersion": "11+28",
           "releaseDate": "2018-09-25",
           "platforms": [
