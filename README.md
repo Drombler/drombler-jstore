@@ -140,6 +140,8 @@ With the specified `jreVendorId` and the returned `jreImplementationId` you can 
 (Please note that this call is not supported by Swagger yet, but works e.g. from the 
 [Drombler JStore Client Agent](https://github.com/Drombler/drombler-jstore-client-agent).)
 
+The call will be redirected to the according download link.
+
 For the provided Java 11 entry in the response above the call could look like this:
 
 http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/webresources/v1/managed-components/jres/oracle/openjdk-11.0.1_linux-x64_bin.tar.gz
