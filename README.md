@@ -75,10 +75,10 @@ Here is a sample request payload:
   }
 }
 ```
-Please note that the `installedImplementationVersion` properties are optional.
-Provide them if you arlready have a JRE installed for the provided `javaSpecificationVersion` and `jreVendorId`.
+Please note that the `installedImplementationVersion` property is optional.
+Provide it if you already have a JRE installed for the provided `jreVendorId` and `javaSpecificationVersion`.
 In this case the `upgradableJREs` property of the response will only contain entries if the latest version is newer.
-If you omit them then you will always get the latest version.
+If you omit it then you will always get the latest version.
 
 In the `systemInfo` section you can specify the details of the platform.
 
@@ -127,7 +127,7 @@ The response will look something like this (please not that the specification is
   ]
 }
 ```
-With the specified jreVendorId and jreImplementationId you can then download the JRE like this:
+With the specified `jreVendorId` and `jreImplementationId` you can then download the JRE like this:
 
 [GET /managed-components/jres/{jreVendorId}/{jreImplementationId}](http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/swagger-ui.html#/JreController_V1)
 
