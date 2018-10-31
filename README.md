@@ -1,14 +1,24 @@
 # Drombler JStore
-Drombler JStore (working title) starts the next generation of application deployment solutions.
+Drombler JStore (working title) is the emerging next generation, cross-platform application store.
 
-Drombler JStore provides first class support for Java applications.
+Drombler JStore provides first class support for Java applications and especially targets the post-Java 11 era.
 
-For more background information see: http://www.drombler.org/drombler-jstore
+For this purpose Drombler JStore also manages the following native components:
+* JRE: There are RESTful services to discover new JRE update versions and download JREs for your target platform.
+* JavaFX (possibly supported in the future)
+
+This solution targets various [end-user and enterprise scenarios](http://www.drombler.org/drombler-jstore/documentation/overview.html).
+
+This project provides the actual backend with RESTful services.
+
+For more information about this project and the related software components see: http://www.drombler.org/drombler-jstore
 
 [![Join the chat at https://gitter.im/Drombler/drombler-jstore](https://badges.gitter.im/Drombler/drombler-jstore.svg)](https://gitter.im/Drombler/drombler-jstore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+## How to run the backend
 [org.drombler.jstore.JStoreApp](https://github.com/Drombler/drombler-jstore/blob/14-Document-JRE-REST-resources/drombler-jstore-web/src/main/java/org/drombler/jstore/JStoreApp.java) is a Spring Boot application.
 
+## RESTful Services
 Local Swagger: http://localhost:5000/swagger-ui.html
 
 Staging Swagger: http://drombler-jstore-staging.us-east-1.elasticbeanstalk.com/swagger-ui.html
