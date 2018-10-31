@@ -12,5 +12,3 @@ The Swagger documentation is online [available](http://drombler-jstore-staging.u
 * Register vendors
 * Provide vendor contact options
 
-### Current State
-* a first deployed REST service is available (likely to change)
