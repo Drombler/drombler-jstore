@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.drombler</groupId>
         <artifactId>drombler-oss-parent</artifactId>
-        <version>3.1</version>
+        <version>3.2-SNAPSHOT</version>
         <relativePath />
     </parent>
 
@@ -31,7 +31,7 @@
         <license>
             <name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</name>
             <distribution>repo</distribution>
-            <!--<url>http://java.sun.com/spl.html</url>-->
+            <!--<url>https://opensource.org/licenses/CDDL-1.0</url>-->
             <url>../LICENSE.txt</url>
         </license>
     </licenses>
@@ -72,13 +72,13 @@
         </distributionManagement.parent.url>
         <!-- URL to use with the GitHub site plugin -->
         <!--<distributionManagement.parent.url>${project.version}/docs/site</distributionManagement.parent.url>-->
-        <!--<url.parent>http://www.drombler.org/drombler-jstore/${project.version}/docs/site</url.parent>-->
+        <!--<url.parent>https://www.drombler.org/drombler-jstore/${project.version}/docs/site</url.parent>-->
 
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
         <!-- Dependency Versions Defaults -->
         <!--<drombler-commons.version>0.12-SNAPSHOT</drombler-commons.version>-->
-        <drombler-jstore-protocol.version>0.4</drombler-jstore-protocol.version>
+        <drombler-jstore-protocol.version>0.5-SNAPSHOT</drombler-jstore-protocol.version>
     </properties>
 
     <!-- Not inherited!?? -->

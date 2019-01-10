@@ -14,9 +14,36 @@ management:
     health:
       show-details: ALWAYS
 
+keycloak:
+  realm: "drombler-staging"
+  auth-server-url: "http://127.0.0.1:8070/auth"
+  ssl-required: "external"
+  resource: "jstore"
+  credentials:
+    secret: "11111111-1111-1111-1111-111111111111"
+  use-resource-role-mappings: true
+  securityConstraints:
+    -
+      authRoles:
+        - "admin"
+        - "user"
+      securityCollections:
+        -
+          name: "Managed Components"
+          patterns:
+            - "/v1/managed-components/*"
+    -
+      authRoles:
+        - "admin"
+      securityCollections:
+        -
+          name: "admin stuff"
+          patterns:
+            - "/admin"
+
 jstore:
   nexus:
-    endpoint: 'http://ec2-34-201-26-96.compute-1.amazonaws.com:8081'
-    all-repo: '/repository/jstore-test'
-    free-only-repo: '/repository/jstore-free-test'
-    paid-only-repo: '/repository/jstore-paid-test'
+    endpoint: 'http://localhost:8091'
+    all-repo: 'jstore'
+    free-only-repo: 'jstore-free'
+    paid-only-repo: 'jstore-paid'

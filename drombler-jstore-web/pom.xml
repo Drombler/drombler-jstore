@@ -77,6 +77,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
         <!--&lt;!&ndash; Not supported by Springfox Swagger, yet&ndash;&gt;-->
         <!--&lt;!&ndash; Non-blocking processing not supported by JDBC/ JPA, yet&ndash;&gt;-->
         <!--<groupId>org.springframework.boot</groupId>-->
@@ -105,6 +109,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
         </dependency>
@@ -125,5 +134,7 @@
         </dependency>
 
     </dependencies>
+
+
 
 </project>
