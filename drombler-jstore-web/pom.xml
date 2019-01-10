@@ -141,6 +141,9 @@
             <build>
                 <plugins>
                     <plugin>
+                        <!-- Required by Dockerfile -->
+                        <!-- Faster than using the indirection provided by the fat jar launcher -->
+                        <!-- https://spring.io/guides/gs/spring-boot-docker/ -->
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
@@ -178,9 +181,6 @@
                         <configuration>
                             <repository>${docker.image.prefix}/drombler-jstore</repository>
                             <tag>${project.version}</tag>
-                            <buildArgs>
-                                <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                            </buildArgs>
                         </configuration>
                     </plugin>
                 </plugins>
