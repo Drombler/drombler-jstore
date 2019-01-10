@@ -141,6 +141,30 @@
             <build>
                 <plugins>
                     <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-dockerfile</id>
+                                <phase>process-sources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/docker-sources</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}/src/main/docker</directory>
+                                            <includes>
+                                                <include>*</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <!-- Required by Dockerfile -->
                         <!-- Faster than using the indirection provided by the fat jar launcher -->
                         <!-- https://spring.io/guides/gs/spring-boot-docker/ -->
@@ -161,6 +185,7 @@
                                             <version>${project.version}</version>
                                         </artifactItem>
                                     </artifactItems>
+                                    <outputDirectory>${project.build.directory}/docker-sources/dependency</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -181,6 +206,7 @@
                         <configuration>
                             <repository>${docker.image.prefix}/drombler-jstore</repository>
                             <tag>${project.version}</tag>
+                            <contextDirectory>${project.build.directory}/docker-sources</contextDirectory>
                         </configuration>
                     </plugin>
                 </plugins>
