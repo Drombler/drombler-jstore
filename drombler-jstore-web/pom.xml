@@ -135,9 +135,6 @@
                     <value>true</value>
                 </property>
             </activation>
-            <properties>
-                <docker.image.prefix>drombler</docker.image.prefix>
-            </properties>
             <build>
                 <plugins>
                     <plugin>
@@ -151,7 +148,7 @@
                                 </goals>
 
                                 <configuration>
-                                    <outputDirectory>${project.build.directory}/docker-sources</outputDirectory>
+                                    <outputDirectory>${docker-sources.outputDirectory}</outputDirectory>
                                     <resources>
                                         <resource>
                                             <directory>${project.basedir}/src/main/docker</directory>
@@ -185,7 +182,7 @@
                                             <version>${project.version}</version>
                                         </artifactItem>
                                     </artifactItems>
-                                    <outputDirectory>${project.build.directory}/docker-sources/dependency</outputDirectory>
+                                    <outputDirectory>${docker-sources.outputDirectory}/dependency</outputDirectory>
                                 </configuration>
                             </execution>
                         </executions>
@@ -193,20 +190,8 @@
                     <plugin>
                         <groupId>com.spotify</groupId>
                         <artifactId>dockerfile-maven-plugin</artifactId>
-                        <version>1.4.9</version>
-                        <executions>
-                            <execution>
-                                <id>default</id>
-                                <goals>
-                                    <goal>build</goal>
-                                    <goal>push</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                         <configuration>
                             <repository>${docker.image.prefix}/drombler-jstore</repository>
-                            <tag>${project.version}</tag>
-                            <contextDirectory>${project.build.directory}/docker-sources</contextDirectory>
                         </configuration>
                     </plugin>
                 </plugins>
