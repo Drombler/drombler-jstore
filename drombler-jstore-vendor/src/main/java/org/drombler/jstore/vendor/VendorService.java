@@ -8,6 +8,6 @@ import org.drombler.jstore.protocol.json.VendorInfo;
 import java.util.Optional;
 
 public interface VendorService {
-    void createVendor(VendorInfo vendorInfo) throws JStoreException;
+    VendorInfo createVendor(VendorInfo vendorInfo) throws JStoreException;
 
 }
