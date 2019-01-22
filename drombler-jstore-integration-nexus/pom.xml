@@ -13,12 +13,39 @@
     <name>Drombler JStore - Integration - Nexus</name>
     <inceptionYear>2018</inceptionYear>
 
+    <properties>
+        <nx-version>3.3.0-01</nx-version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-core</artifactId>
+            <version>${nx-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-script</artifactId>
+            <version>${nx-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonatype.nexus</groupId>
+            <artifactId>nexus-security</artifactId>
+            <version>${nx-version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.sonatype.nexus.plugins</groupId>
+            <artifactId>nexus-script-plugin</artifactId>
+            <version>${nx-version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>

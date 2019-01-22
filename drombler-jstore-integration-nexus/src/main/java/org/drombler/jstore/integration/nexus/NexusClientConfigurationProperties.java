@@ -1,8 +1,8 @@
-package org.drombler.jstore.integration.nexus.client;
+package org.drombler.jstore.integration.nexus;
 
 import java.net.URI;
 
-public class NexusClientConfiguration {
+public class NexusClientConfigurationProperties {
     private URI endpoint;
     private String allRepo;
     private String freeOnlyRepo;
