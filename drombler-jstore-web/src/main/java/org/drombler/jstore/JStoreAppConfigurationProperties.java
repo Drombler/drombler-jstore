@@ -1,6 +1,6 @@
 package org.drombler.jstore;
 
-import org.drombler.jstore.integration.nexus.NexusConfigurationProperties;
+import org.drombler.jstore.integration.nexus.NexusClientConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Bean;
@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 public class JStoreAppConfigurationProperties {
 
     @NestedConfigurationProperty
-    private NexusConfigurationProperties nexus = new NexusConfigurationProperties();
+    private NexusClientConfigurationProperties nexus = new NexusClientConfigurationProperties();
 
     @Bean
-    public NexusConfigurationProperties getNexus() {
+    public NexusClientConfigurationProperties getNexus() {
         return nexus;
     }
 }

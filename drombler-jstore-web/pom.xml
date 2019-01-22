@@ -53,6 +53,11 @@
             <artifactId>drombler-jstore-managed-jre</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>drombler-jstore-vendor</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.drombler.jstore.protocol</groupId>
