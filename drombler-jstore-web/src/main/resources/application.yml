@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: drombler-jstore
+  liquibase:
+    change-log: 'classpath:/org/drombler/jstore/integration/persistence'
+    default-schema: 'JSTORE'
 
 
 management:

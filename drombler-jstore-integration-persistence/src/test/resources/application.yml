@@ -1,0 +1,4 @@
+spring:
+  liquibase:
+    change-log: 'classpath:/org/drombler/jstore/integration/persistence'
+    default-schema: 'JSTORE'

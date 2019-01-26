@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+<changeSet id="v1.0-1" author="puce77">
+    <comment>Create VENDOR Table</comment>
+    <createTable tableName="VENDOR" remarks="The software vendors">
+        <column name="ID" type="BIGINTER" remarks="the technical surrogate PK">
+            <constraints primaryKey="true" primaryKeyName="VENDOR_PK" />
+        </column>
+    </createTable>
+</changeSet>
+</databaseChangeLog>
