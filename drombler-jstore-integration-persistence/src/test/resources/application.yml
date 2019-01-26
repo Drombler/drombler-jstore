@@ -1,4 +1,8 @@
 spring:
+  jpa:
+    properties:
+      hibernate:
+        default_schema: 'JSTORE'
   liquibase:
-    change-log: 'classpath:/org/drombler/jstore/integration/persistence'
+    change-log: 'classpath:/org/drombler/jstore/integration/persistence/db.changelog-master.xml'
     default-schema: 'JSTORE'

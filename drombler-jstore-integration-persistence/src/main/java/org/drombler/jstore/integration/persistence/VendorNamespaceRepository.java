@@ -12,10 +12,10 @@ import java.util.List;
 public interface VendorNamespaceRepository extends JpaRepository<VendorNamespaceEntity, Long> {
 
     @Query("SELECT n FROM VendorNamespaceEntity n " +
-            "WHERE n.namespace IS MEMBER OF %namespaces ")
+            "WHERE n.namespace IS MEMBER OF :namespaces ")
     List<VendorNamespaceEntity> findByNamespaces(@Param("namespaces")Collection<String> namespaces);
 
     @Query("SELECT n.vendor FROM VendorNamespaceEntity n " +
-            "WHERE n.namespace = %namespace ")
+            "WHERE n.namespace = :namespace ")
     VendorEntity findVendorByNamespace(@Param("namespace")String namespace);
 }

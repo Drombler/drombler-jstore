@@ -6,12 +6,39 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-<changeSet id="v1.0-1" author="puce77">
-    <comment>Create VENDOR Table</comment>
-    <createTable tableName="VENDOR" remarks="The software vendors">
-        <column name="ID" type="BIGINTER" remarks="the technical surrogate PK">
-            <constraints primaryKey="true" primaryKeyName="VENDOR_PK" />
-        </column>
-    </createTable>
-</changeSet>
+    <changeSet id="v1.0-1" author="puce77">
+        <comment>Create VENDOR Table</comment>
+        <createTable tableName="VENDOR" remarks="The software vendors">
+            <column name="ID" type="BIGINT" remarks="the technical surrogate PK">
+                <constraints primaryKey="true" primaryKeyName="VENDOR_PK"/>
+            </column>
+            <column name="VENDOR_ID" type="VARCHAR(15)" remarks="the vendor id">
+                <constraints nullable="false" unique="true" uniqueConstraintName="VENDOR_ID_UQ"/>
+            </column>
+            <column name="STATUS" type="VARCHAR(20)" remarks="the status">
+                <constraints nullable="false" />
+            </column>
+            <column name="VERIFIED" type="BOOLEAN" defaultValueBoolean="false" remarks="flag, if the authenticity of this vendor has been verified by the platform service provider">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP" remarks="the timestamp when this entity was created">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(15)" remarks="the user who created this entity">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED_AT" type="TIMESTAMP" remarks="the timestamp when this entity was last modified">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(15)" remarks="the user who last modified this entity">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_VERSION" type="BIGINT"
+                    remarks="the entity version used by JPA for optimistic locking"/>
+        </createTable>
+
+        <createSequence sequenceName="VENDOR_SEQ" incrementBy="1" />
+
+        <addDefaultValue tableName="VENDOR" columnName="ID" defaultValueSequenceNext="VENDOR_SEQ" />
+    </changeSet>
 </databaseChangeLog>
