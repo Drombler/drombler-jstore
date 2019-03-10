@@ -19,8 +19,8 @@ public class VendorServiceImpl implements VendorService {
     @Autowired
     private VendorRepository vendorRepository;
 
-    @Autowired
-    private VendorNamespaceRepository vendorNamespaceRepository;
+//    @Autowired
+//    private VendorNamespaceRepository vendorNamespaceRepository;
 
     @Autowired
     private NexusClient nexusClient;
@@ -32,10 +32,10 @@ public class VendorServiceImpl implements VendorService {
        if (vendorEntity != null){
 // TODO
        }
-        List<VendorNamespaceEntity> vendorNamespaceEntities = vendorNamespaceRepository.findByNamespaces(vendorInfo.getNamespaces());
-        if (! vendorNamespaceEntities.isEmpty()){
-// TODO
-        }
+//        List<VendorNamespaceEntity> vendorNamespaceEntities = vendorNamespaceRepository.findByNamespaces(vendorInfo.getNamespaces());
+//        if (! vendorNamespaceEntities.isEmpty()){
+//// TODO
+//        }
         vendorEntity = createVendorEntity(vendorInfo);
        vendorRepository.save(vendorEntity);
        addVendorProxy(vendorInfo);

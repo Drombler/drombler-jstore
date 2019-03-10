@@ -3,16 +3,24 @@ server:
 
 spring:
   application:
-    name: drombler-jstore
+    name: 'drombler-jstore'
+  jpa:
+    properties:
+      hibernate:
+        default_schema: 'JSTORE'
   liquibase:
-    change-log: 'classpath:/org/drombler/jstore/integration/persistence'
+    change-log: 'classpath:/org/drombler/jstore/integration/persistence/db.changelog-master.xml'
     default-schema: 'JSTORE'
+
+logging:
+  level:
+    org.springframework.security: 'DEBUG'
 
 
 management:
   endpoints:
     web:
-      base-path: '/webresources'
+      base-path: '/api'
   endpoint:
     health:
       show-details: ALWAYS
@@ -22,27 +30,29 @@ keycloak:
   auth-server-url: "http://127.0.0.1:8070/auth"
   ssl-required: "external"
   resource: "jstore"
-  credentials:
-    secret: "11111111-1111-1111-1111-111111111111"
+#  credentials:
+#    secret: "11111111-1111-1111-1111-111111111111"
   use-resource-role-mappings: true
-  securityConstraints:
-    -
-      authRoles:
-        - "admin"
-        - "user"
-      securityCollections:
-        -
-          name: "Managed Components"
-          patterns:
-            - "/v1/managed-components/*"
-    -
-      authRoles:
-        - "admin"
-      securityCollections:
-        -
-          name: "admin stuff"
-          patterns:
-            - "/admin"
+  bearer-only: true
+#  securityConstraints:
+#    -
+#      authRoles:
+#        - "admin"
+#        - "user"
+#      securityCollections:
+#        -
+#          name: "Managed Components"
+#          patterns:
+#            - "/api/v1/managed-components/*"
+#    -
+#      authRoles:
+#        - "admin"
+#      securityCollections:
+#        -
+#          name: "admin stuff"
+#          patterns:
+#            - "/admin"
+  principal-attribute: preferred_username
 
 jstore:
   nexus:

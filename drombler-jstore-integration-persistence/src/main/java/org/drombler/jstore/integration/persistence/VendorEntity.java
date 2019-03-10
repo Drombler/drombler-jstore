@@ -10,14 +10,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static org.drombler.jstore.integration.persistence.VendorUserEntity.ALLOCATION_SIZE;
+import static org.drombler.jstore.integration.persistence.VendorEntity.ALLOCATION_SIZE;
 import static org.softsmithy.lib.persistence.AbstractEntity.PRIMARY_GENERATOR;
 
 @Entity
-//@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 @SequenceGenerator(name = PRIMARY_GENERATOR, sequenceName = "VENDOR_SEQ", allocationSize = ALLOCATION_SIZE)
 @Table(name = "VENDOR")
 public class VendorEntity extends AbstractAuditableEntity {
+    public static final int ALLOCATION_SIZE = 1;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vendorSequence")
@@ -31,7 +32,7 @@ public class VendorEntity extends AbstractAuditableEntity {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "STATUS")
-    private VendorStatus status;
+    private VendorStatus status = VendorStatus.VERIFICATION_PENDING;
 
 
     private boolean verified = false;

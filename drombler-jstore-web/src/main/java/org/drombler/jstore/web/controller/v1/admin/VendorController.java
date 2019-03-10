@@ -7,12 +7,14 @@ import org.drombler.jstore.protocol.json.CreateVendorRequest;
 import org.drombler.jstore.protocol.json.VendorInfo;
 import org.drombler.jstore.vendor.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.servlet.http.HttpServletRequest;
 
 import static org.drombler.jstore.web.controller.RestControllerUtils.ADMIN_V1_PATH;
 
@@ -23,6 +25,9 @@ public class VendorController {
 
     @Autowired
     private VendorService vendorService;
+
+    @Autowired
+    private HttpServletRequest request;
 
     @ApiOperation("Registers a new application vendor.")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
