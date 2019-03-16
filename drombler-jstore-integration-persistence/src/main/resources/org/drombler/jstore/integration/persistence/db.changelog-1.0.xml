@@ -15,10 +15,22 @@
             <column name="VENDOR_ID" type="VARCHAR(15)" remarks="the vendor id">
                 <constraints nullable="false" unique="true" uniqueConstraintName="VENDOR_ID_UQ"/>
             </column>
+            <column name="NAME" type="VARCHAR(100)" remarks="the vendor name">
+                <constraints nullable="false" />
+            </column>
             <column name="STATUS" type="VARCHAR(20)" remarks="the status">
                 <constraints nullable="false" />
             </column>
             <column name="VERIFIED" type="BOOLEAN" defaultValueBoolean="false" remarks="flag, if the authenticity of this vendor has been verified by the platform service provider">
+                <constraints nullable="false" />
+            </column>
+            <column name="HOMEPAGE" type="VARCHAR(100)" remarks="the vendor homepage">
+                <constraints nullable="false" />
+            </column>
+            <column name="REGISTRATION_EMAIL_ADDRESS" type="VARCHAR(100)" remarks="the registration email address">
+                <constraints nullable="false" />
+            </column>
+            <column name="CUSTOMER_EMAIL_ADDRESS" type="VARCHAR(100)" remarks="the customer contact email address">
                 <constraints nullable="false" />
             </column>
             <column name="CREATED_AT" type="TIMESTAMP" remarks="the timestamp when this entity was created">
