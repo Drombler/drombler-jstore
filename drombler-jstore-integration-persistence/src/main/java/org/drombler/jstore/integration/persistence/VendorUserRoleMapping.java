@@ -4,6 +4,6 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class VendorUserRoleMapping {
-    private String userName;
+    private String username;
     private VendorRole role;
 }
