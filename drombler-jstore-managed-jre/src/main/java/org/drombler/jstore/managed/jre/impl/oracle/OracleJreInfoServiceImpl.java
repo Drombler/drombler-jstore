@@ -1,5 +1,6 @@
 package org.drombler.jstore.managed.jre.impl.oracle;
 
+import org.drombler.commons.spring.jpa.stereotype.TransactionalService;
 import org.drombler.jstore.managed.jre.JreInfoManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vdurmont.semver4j.Semver;
