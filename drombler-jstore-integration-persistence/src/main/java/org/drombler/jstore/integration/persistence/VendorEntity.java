@@ -62,10 +62,9 @@ public class VendorEntity extends AbstractAuditableEntity {
     @Column(name = "HOMEPAGE")
     private URL homepage;
 
-    @NotBlank
     @Email
     @Size(max = EMAIL_ADDRESS_MAX_LENGTH)
-    @Column(name = "REGISTRATION_EMAIL_ADDRESS", updatable = false) // TODO: provide a verification process for updating the registration email address
+    @Column(name = "REGISTRATION_EMAIL_ADDRESS")
     private String registrationEmailAddress;
 
     @NotBlank

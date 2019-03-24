@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import static org.drombler.jstore.integration.persistence.VendorNamespaceEntity.ALLOCATION_SIZE;
 import static org.drombler.jstore.integration.persistence.VendorNamespaceEntity.VENDOR_NAMESPACE_GENERATOR;
@@ -25,6 +26,7 @@ public class VendorNamespaceEntity extends AbstractAuditableEntity {
     @Column(name = "ID")
     private Long id;
 
+    @NotNull
     @ManyToOne(optional = false)
     @JoinColumn(name="VENDOR_PK", nullable=false, updatable=false)
     private VendorEntity vendor;

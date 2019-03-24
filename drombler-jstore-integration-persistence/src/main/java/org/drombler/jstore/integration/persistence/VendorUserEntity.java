@@ -25,6 +25,7 @@ public class VendorUserEntity extends AbstractAuditableEntity {
     @Column(name = "ID")
     private Long id;
 
+    @NotNull
     @ManyToOne(optional = false)
     @JoinColumn(name="VENDOR_PK", nullable=false, updatable=false)
     private VendorEntity vendor;
