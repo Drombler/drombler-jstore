@@ -10,12 +10,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import static org.drombler.jstore.integration.persistence.FieldLengthUtils.EMAIL_ADDRESS_MAX_LENGTH;
-import static org.drombler.jstore.integration.persistence.VendorEntity.ALLOCATION_SIZE;
-import static org.drombler.jstore.integration.persistence.VendorEntity.VENDOR_GENERATOR;
+import static org.drombler.jstore.integration.persistence.VendorRegistrationEntity.ALLOCATION_SIZE;
+import static org.drombler.jstore.integration.persistence.VendorRegistrationEntity.VENDOR_REGISTRATION_GENERATOR;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@SequenceGenerator(name = VENDOR_GENERATOR, sequenceName = "VENDOR_REGISTRATION_SEQ", allocationSize = ALLOCATION_SIZE)
+@SequenceGenerator(name = VENDOR_REGISTRATION_GENERATOR, sequenceName = "VENDOR_REG_SEQ", allocationSize = ALLOCATION_SIZE)
 @Table(name = "VENDOR_REGISTRATION")
 public class VendorRegistrationEntity extends AbstractAuditableEntity {
     public static final int ALLOCATION_SIZE = 1;

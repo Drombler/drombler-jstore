@@ -14,7 +14,7 @@
                 <constraints primaryKey="true" primaryKeyName="VENDOR_PK"/>
             </column>
             <column name="VENDOR_ID" type="VARCHAR(15)" remarks="the vendor id">
-                <constraints nullable="false" unique="true" uniqueConstraintName="VENDOR_ID_UQ"/>
+                <constraints nullable="false" unique="true" uniqueConstraintName="VENDOR_ID_UNQ"/>
             </column>
             <column name="NAME" type="VARCHAR(100)" remarks="the vendor name">
                 <constraints nullable="false"/>
@@ -29,9 +29,7 @@
             <column name="HOMEPAGE" type="VARCHAR(100)" remarks="the vendor homepage">
                 <constraints nullable="false"/>
             </column>
-            <column name="REGISTRATION_EMAIL_ADDRESS" type="VARCHAR(100)" remarks="the registration email address">
-                <constraints nullable="false"/>
-            </column>
+            <column name="REGISTRATION_EMAIL_ADDRESS" type="VARCHAR(100)" remarks="the registration email address"/>
             <column name="CUSTOMER_EMAIL_ADDRESS" type="VARCHAR(100)" remarks="the customer contact email address">
                 <constraints nullable="false"/>
             </column>
@@ -110,7 +108,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="NAMESPACE" type="VARCHAR(100)" remarks="the namespace">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true" uniqueConstraintName="VENDOR_NAMESPACE_UNQ"/>
             </column>
             <column name="CREATED_AT" type="TIMESTAMP" remarks="the timestamp when this entity was created">
                 <constraints nullable="false"/>
@@ -132,10 +130,50 @@
                                  constraintName="VENDOR_NAMESPACE_VENDOR_FK" referencedTableName="VENDOR"
                                  referencedColumnNames="ID"/>
 
-        <addUniqueConstraint tableName="VENDOR_NAMESPACE" columnNames="NAMESPACE" constraintName="VENDOR_NAMESPACE_UNQ" />
-
         <createSequence sequenceName="VENDOR_NAMESPACE_SEQ" incrementBy="1"/>
 
         <addDefaultValue tableName="VENDOR_NAMESPACE" columnName="ID" defaultValueSequenceNext="VENDOR_NAMESPACE_SEQ"/>
+    </changeSet>
+
+    <changeSet id="v1.0-4" author="puce77">
+        <comment>Create VENDOR_REGISTRATION Table</comment>
+
+        <createTable tableName="VENDOR_REGISTRATION" remarks="The vendor registration activation">
+            <column name="ID" type="BIGINT" remarks="the technical surrogate PK">
+                <constraints primaryKey="true" primaryKeyName="VENDOR_REG_PK"/>
+            </column>
+            <column name="VENDOR_PK" type="BIGINT" remarks="the vendor PK">
+                <constraints nullable="false" unique="true" uniqueConstraintName="VENDOR_REG_VENDOR_UNQ"/>
+            </column>
+            <column name="REGISTRATION_EMAIL_ADDRESS" type="VARCHAR(100)" remarks="the pending registration email address">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIVATION_CODE" type="VARCHAR(100)" remarks="the activation code">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="TIMESTAMP" remarks="the timestamp when this entity was created">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(15)" remarks="the user who created this entity">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED_AT" type="TIMESTAMP" remarks="the timestamp when this entity was last modified">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(15)" remarks="the user who last modified this entity">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ENTITY_VERSION" type="BIGINT"
+                    remarks="the entity version used by JPA for optimistic locking"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="VENDOR_REGISTRATION" baseColumnNames="VENDOR_PK"
+                                 constraintName="VENDOR_REG_VENDOR_FK" referencedTableName="VENDOR"
+                                 referencedColumnNames="ID"/>
+
+
+        <createSequence sequenceName="VENDOR_REG_SEQ" incrementBy="1"/>
+
+        <addDefaultValue tableName="VENDOR_REGISTRATION" columnName="ID" defaultValueSequenceNext="VENDOR_REG_SEQ"/>
     </changeSet>
 </databaseChangeLog>
