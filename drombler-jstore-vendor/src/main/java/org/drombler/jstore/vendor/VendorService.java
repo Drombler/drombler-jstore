@@ -1,13 +1,18 @@
 package org.drombler.jstore.vendor;
 
-import org.drombler.jstore.model.VersionedPlatform;
+import org.drombler.jstore.model.RequestInfo;
 import org.drombler.jstore.model.JStoreException;
-import org.drombler.jstore.protocol.json.SelectedJRE;
-import org.drombler.jstore.protocol.json.VendorInfo;
+import org.drombler.jstore.protocol.json.CreateVendorRequest;
+import org.drombler.jstore.protocol.json.VendorDetails;
+import org.drombler.jstore.protocol.json.VendorPublicInfo;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface VendorService {
-    VendorInfo createVendor(VendorInfo vendorInfo) throws JStoreException;
+    VendorDetails createVendor(RequestInfo requestInfo, CreateVendorRequest vendorInfo) throws JStoreException;
 
-}
+    VendorPublicInfo getVendorPublicInfo(String vendorId) throws JStoreException;
+    List<VendorDetails> getVendorsForVendorManagement(RequestInfo requestInfo);
+    void markVendorVerified(String vendorId) throws JStoreException;
+
+    }

@@ -1,55 +1,75 @@
 package org.drombler.jstore.vendor.impl;
 
-import org.drombler.jstore.integration.persistence.VendorEntity;
-import org.drombler.jstore.integration.persistence.VendorNamespaceEntity;
-import org.drombler.jstore.integration.persistence.VendorNamespaceRepository;
-import org.drombler.jstore.integration.persistence.VendorRepository;
+import org.drombler.commons.spring.jpa.stereotype.TransactionalService;
+import org.drombler.jstore.integration.persistence.*;
+import org.drombler.jstore.model.JStoreErrorCode;
 import org.drombler.jstore.model.JStoreException;
-import org.drombler.jstore.model.TransactionalService;
-import org.drombler.jstore.protocol.json.VendorInfo;
+import org.drombler.jstore.model.RequestInfo;
+import org.drombler.jstore.protocol.json.CreateVendorRequest;
+import org.drombler.jstore.protocol.json.VendorDetails;
+import org.drombler.jstore.protocol.json.VendorPublicInfo;
+import org.drombler.jstore.protocol.json.VendorRegistrationDetails;
 import org.drombler.jstore.vendor.VendorService;
+import org.drombler.jstore.vendor.impl.converter.VendorDetailsConverter;
+import org.drombler.jstore.vendor.impl.converter.VendorPublicInfoConverter;
+import org.drombler.jstore.vendor.impl.converter.VendorRegistrationDetailsConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.drombler.jstore.integration.nexus.client.NexusClient;
+import org.springframework.util.Assert;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @TransactionalService
 public class VendorServiceImpl implements VendorService {
 
     @Autowired
-    private VendorRepository vendorRepository;
+private VendorPersistenceService vendorPersistenceService;
 
-//    @Autowired
-//    private VendorNamespaceRepository vendorNamespaceRepository;
+    @Autowired
+    private AccountActivationService accountActivationService;
 
     @Autowired
     private NexusClient nexusClient;
 
     @Override
-    public VendorInfo createVendor(VendorInfo vendorInfo) throws JStoreException {
-        String vendorId = vendorInfo.getVendorId();
-       VendorEntity vendorEntity = vendorRepository.findByVendorId(vendorId);
-       if (vendorEntity != null){
-// TODO
-       }
-//        List<VendorNamespaceEntity> vendorNamespaceEntities = vendorNamespaceRepository.findByNamespaces(vendorInfo.getNamespaces());
-//        if (! vendorNamespaceEntities.isEmpty()){
-//// TODO
-//        }
-        vendorEntity = createVendorEntity(vendorInfo);
-       vendorRepository.save(vendorEntity);
-       addVendorProxy(vendorInfo);
-        return vendorInfo;
+    public VendorDetails createVendor(RequestInfo requestInfo, CreateVendorRequest createVendorRequest) throws JStoreException {
+        String activationCode = accountActivationService.createActivationCode();
+        VendorDetails vendorDetails = vendorPersistenceService.createVendor(requestInfo, createVendorRequest,activationCode);
+       addVendorProxy(createVendorRequest);
+       accountActivationService.sendActivationEmail(vendorDetails.getRegistrationDetails().getPendingRegistrationEmailAddress(), activationCode);
+        return vendorDetails;
     }
 
-    private void addVendorProxy(VendorInfo vendorInfo) {
-        nexusClient.createProxy(vendorInfo.getVendorId());
+    @Override
+    public List<VendorDetails> getVendorsForVendorManagement(RequestInfo requestInfo) {
+        Assert.hasText(requestInfo.getUsername(), "username");
+
+        return vendorPersistenceService.getVendorsForVendorManagement(requestInfo.getUsername());
+    }
+
+    @Override
+    public VendorPublicInfo getVendorPublicInfo(String vendorId) throws JStoreException {
+        VendorEntity activeVendorEntity = vendorPersistenceService.getActiveVendorEntity(vendorId);
+        VendorPublicInfoConverter vendorPublicInfoConverter = new VendorPublicInfoConverter();
+        return vendorPublicInfoConverter.convertVendorPublicInfo(activeVendorEntity);
+    }
+
+    @Override
+    public void markVendorVerified(String vendorId) throws JStoreException {
+        vendorPersistenceService.markVendorVerified(vendorId);
+    }
+
+    private void addVendorProxy(CreateVendorRequest createVendorRequest) {
+        nexusClient.createProxy(createVendorRequest.getPublicInfo().getVendorId());
         nexusClient.addRepoToGroup();
     }
 
-    private VendorEntity createVendorEntity(VendorInfo vendorInfo) {
-        VendorEntity vendorEntity = new VendorEntity();
-        vendorEntity.setVendorId(vendorInfo.getVendorId());
-        return vendorEntity;
-    }
+
+
+
+
+
 }
