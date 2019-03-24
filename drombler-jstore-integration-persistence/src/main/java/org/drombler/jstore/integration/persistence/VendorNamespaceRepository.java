@@ -13,9 +13,16 @@ public interface VendorNamespaceRepository extends JpaRepository<VendorNamespace
 
     @Query("SELECT n FROM VendorNamespaceEntity n " +
             "WHERE n.namespace IN :namespaces ")
-    List<VendorNamespaceEntity> findByNamespaces(@Param("namespaces")Collection<String> namespaces);
+    List<VendorNamespaceEntity> findAllByNamespaces(@Param("namespaces")Collection<String> namespaces);
+
+    @Query("SELECT n FROM VendorNamespaceEntity n " +
+            "WHERE n.namespace LIKE CONCAT(:namespace, '%') " +
+            "OR  :namespace LIKE CONCAT(n.namespace, '%') ")
+    List<VendorNamespaceEntity> findAllClaimedNamespaces(@Param("namespace")String namespace);
 
     @Query("SELECT n.vendor FROM VendorNamespaceEntity n " +
             "WHERE n.namespace = :namespace ")
     VendorEntity findVendorByNamespace(@Param("namespace")String namespace);
+
+    List<VendorNamespaceEntity> findAllByVendor(VendorEntity vendorEntity);
 }
