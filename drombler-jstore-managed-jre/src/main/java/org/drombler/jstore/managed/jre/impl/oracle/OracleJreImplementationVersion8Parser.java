@@ -1,8 +1,8 @@
 package org.drombler.jstore.managed.jre.impl.oracle;
 
-import org.drombler.jstore.model.JStoreErrorCode;
-import org.drombler.jstore.model.JStoreException;
 import com.vdurmont.semver4j.Semver;
+import org.drombler.jstore.model.JStoreException;
+import org.drombler.jstore.protocol.v1.json.JStoreErrorCode;
 
 public class OracleJreImplementationVersion8Parser implements OracleJreImplementationVersionParser {
 

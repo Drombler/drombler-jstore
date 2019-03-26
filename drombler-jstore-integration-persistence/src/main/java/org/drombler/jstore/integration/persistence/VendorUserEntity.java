@@ -2,7 +2,7 @@ package org.drombler.jstore.integration.persistence;
 
 
 import org.drombler.commons.spring.jpa.AbstractAuditableEntity;
-import org.springframework.data.jpa.domain.AbstractAuditable;
+import org.drombler.jstore.protocol.json.VendorRole;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;

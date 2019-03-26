@@ -1,12 +1,16 @@
 package org.drombler.jstore.managed.jre.impl.oracle;
 
-import org.drombler.commons.spring.jpa.stereotype.TransactionalService;
-import org.drombler.jstore.managed.jre.JreInfoManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vdurmont.semver4j.Semver;
 import org.apache.commons.lang3.StringUtils;
-import org.drombler.jstore.model.*;
+import org.drombler.commons.spring.jpa.stereotype.TransactionalService;
+import org.drombler.jstore.managed.jre.JreInfoManager;
+import org.drombler.jstore.model.JStoreException;
+import org.drombler.jstore.model.PlatformKey;
+import org.drombler.jstore.model.VersionedPlatform;
+import org.drombler.jstore.model.VersionedPlatformCategory;
 import org.drombler.jstore.protocol.json.*;
+import org.drombler.jstore.protocol.v1.json.JStoreErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;

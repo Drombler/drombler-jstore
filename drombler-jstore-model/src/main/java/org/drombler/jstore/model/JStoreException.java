@@ -1,5 +1,8 @@
 package org.drombler.jstore.model;
 
+import org.drombler.jstore.protocol.v1.json.JStoreErrorCode;
+import org.softsmithy.lib.util.BusinessException;
+
 public class JStoreException extends BusinessException {
 
     private static final long serialVersionUID = 2423918971447441288L;

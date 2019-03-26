@@ -66,6 +66,10 @@
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.drombler.jstore.protocol</groupId>
+            <artifactId>drombler-jstore-protocol</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

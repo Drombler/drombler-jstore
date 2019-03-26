@@ -1,5 +1,7 @@
 package org.drombler.jstore.integration.persistence;
 
+import org.drombler.jstore.protocol.json.VendorRole;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
