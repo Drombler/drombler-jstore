@@ -2,13 +2,13 @@ package org.drombler.jstore.vendor.impl;
 
 import org.drombler.commons.spring.jpa.stereotype.TransactionalService;
 import org.drombler.jstore.integration.persistence.*;
-import org.drombler.jstore.model.JStoreErrorCode;
 import org.drombler.jstore.model.JStoreException;
 import org.drombler.jstore.model.RequestInfo;
 import org.drombler.jstore.protocol.json.CreateVendorRequest;
 import org.drombler.jstore.protocol.json.VendorDetails;
 import org.drombler.jstore.protocol.json.VendorPublicInfo;
-import org.drombler.jstore.protocol.json.VendorRegistrationDetails;
+import org.drombler.jstore.protocol.json.VendorRole;
+import org.drombler.jstore.protocol.v1.json.JStoreErrorCode;
 import org.drombler.jstore.vendor.impl.converter.VendorDetailsConverter;
 import org.drombler.jstore.vendor.impl.converter.VendorPublicInfoConverter;
 import org.drombler.jstore.vendor.impl.converter.VendorRegistrationDetailsConverter;
@@ -42,7 +42,7 @@ public class VendorPersistenceServiceImpl implements VendorPersistenceService {
     public VendorDetails createVendor(RequestInfo requestInfo, CreateVendorRequest createVendorRequest, String activationCode) throws JStoreException {
         String vendorId = createVendorRequest.getPublicInfo().getVendorId();
         VendorEntity vendorEntity = vendorRepository.findByVendorId(vendorId);
-        if (vendorEntity == null){
+        if (vendorEntity != null) {
             throw new JStoreException(JStoreErrorCode.JSTORE_VENDOR_ID_NOT_UNIQUE, "A vendor already exists with vendorId: " + vendorId);
         }
 //        List<VendorNamespaceEntity> vendorNamespaceEntities = vendorNamespaceRepository.findAllByNamespaces(vendorInfo.getNamespaces());
@@ -53,12 +53,16 @@ public class VendorPersistenceServiceImpl implements VendorPersistenceService {
         vendorEntity = vendorRepository.save(vendorEntity);
 
         VendorRegistrationEntity vendorRegistrationEntity = createVendorRegistrationEntity(vendorEntity, createVendorRequest, activationCode);
-        List<VendorNamespaceEntity> vendorNamespaceEntities = createVendorNamespaceEntities(vendorEntity, createVendorRequest);
-       VendorUserEntity vendorUserEntity = createAdminVendorUserEntity(vendorEntity, requestInfo);
+        vendorRegistrationEntity = vendorRegistrationRepository.save(vendorRegistrationEntity);
 
+        List<VendorNamespaceEntity> vendorNamespaceEntities = createVendorNamespaceEntities(vendorEntity, createVendorRequest);
+        vendorNamespaceEntities = vendorNamespaceRepository.saveAll(vendorNamespaceEntities);
+
+        VendorUserEntity vendorUserEntity = createAdminVendorUserEntity(vendorEntity, requestInfo);
+        vendorUserEntity = vendorUserRepository.save(vendorUserEntity);
 
         VendorDetailsConverter detailsConverter = new VendorDetailsConverter();
-        return detailsConverter.convertVendorDetails(vendorEntity, vendorRegistrationEntity, vendorNamespaceEntities, Arrays.asList(vendorUserEntity));
+        return detailsConverter.convertVendorDetails(vendorEntity, vendorRegistrationEntity, vendorNamespaceEntities, Arrays.asList(vendorUserEntity), vendorUserEntity.getUsername());
     }
 
     @Override
@@ -85,23 +89,29 @@ public class VendorPersistenceServiceImpl implements VendorPersistenceService {
 
     private  VendorDetails convertVendorDetails(List<VendorUserEntity> vendorUserEntities) {
         VendorEntity vendorEntity = vendorUserEntities.get(0).getVendor();
+        String username = vendorUserEntities.get(0).getUsername();
+
         VendorRoleChecker roleChecker = new VendorRoleChecker();
-        VendorRegistrationEntity vendorRegistrationEntity = roleChecker.hasVendorRole(vendorUserEntities, VendorRole.ADMIN)
+        VendorRegistrationEntity vendorRegistrationEntity = roleChecker.hasVendorRole(vendorUserEntities, username, VendorRole.ADMIN)
                 ? vendorRegistrationRepository.findByVendor(vendorEntity)
                 : null;
 
-        List<VendorNamespaceEntity> vendorNamespaceEntities = roleChecker.hasVendorRole(vendorUserEntities, VendorRole.ADMIN)
+        List<VendorNamespaceEntity> vendorNamespaceEntities = roleChecker.hasVendorRole(vendorUserEntities, username, VendorRole.ADMIN)
                 ? vendorNamespaceRepository.findAllByVendor(vendorEntity)
                 : null;
 
+        List<VendorUserEntity> allVendorUserEntities = roleChecker.hasVendorRole(vendorUserEntities, username, VendorRole.ADMIN)
+                ? vendorUserRepository.findByVendor(vendorEntity)
+                : vendorUserEntities;
+
         VendorDetailsConverter vendorDetailsConverter = new VendorDetailsConverter();
-        return vendorDetailsConverter.convertVendorDetails(vendorEntity, vendorRegistrationEntity,vendorNamespaceEntities,vendorUserEntities);
+        return vendorDetailsConverter.convertVendorDetails(vendorEntity, vendorRegistrationEntity, vendorNamespaceEntities, allVendorUserEntities, username);
     }
 
 
     private VendorEntity getVendorEntity(String vendorId) throws JStoreException {
         VendorEntity vendorEntity = vendorRepository.findByVendorId(vendorId);
-        if (vendorEntity != null) {
+        if (vendorEntity == null) {
             throw new JStoreException(JStoreErrorCode.JSTORE_VENDOR_NOT_FOUND, "No vendor found for vendorId: " + vendorId);
         }
         return vendorEntity;
