@@ -15,6 +15,15 @@ For more information about this project and the related software components see:
 
 [![Join the chat at https://gitter.im/Drombler/drombler-jstore](https://badges.gitter.im/Drombler/drombler-jstore.svg)](https://gitter.im/Drombler/drombler-jstore?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+
+## Build the project from sources
+```bash
+mvn clean install
+```
+Please note that the develop branch (SNAPSHOT version) of the project might depend on SNAPSHOT versions of other projects.
+
+If you don't want to build the dependent projects as well, please make sure to define a proxy in your [Maven Repository Manager](https://maven.apache.org/repository-management.html) to the following Maven Repository: https://oss.sonatype.org/content/repositories/snapshots/ and include it in your [single group](https://help.sonatype.com/repomanager3/formats/maven-repositories#MavenRepositories-ConfiguringApacheMaven).
+
 ## How to run the backend
 [org.drombler.jstore.JStoreApp](https://github.com/Drombler/drombler-jstore/blob/14-Document-JRE-REST-resources/drombler-jstore-web/src/main/java/org/drombler/jstore/JStoreApp.java) is a Spring Boot application.
 
